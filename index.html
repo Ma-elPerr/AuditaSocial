@@ -115,6 +115,17 @@
             box-shadow: 0 6px 15px rgba(39, 174, 96, 0.35);
         }
         
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+
         /* General Page Styles */
         .page {
             display: none; /* Pages are hidden by default */
@@ -231,6 +242,179 @@
             font-size: 1.5rem;
         }
 
+        /* Use Cases */
+        .use-cases {
+            background-color: #f0f4f9;
+        }
+
+        .case-study {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            margin-bottom: 60px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        .case-image {
+            flex: 1;
+            min-height: 300px;
+            background: url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .case-content {
+            flex: 1;
+            padding: 40px;
+        }
+
+        .case-content h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+
+        .case-content p {
+            margin-bottom: 20px;
+        }
+
+        .impact-list {
+            list-style: none;
+            margin-top: 25px;
+        }
+
+        .impact-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            gap: 10px;
+        }
+
+        .impact-list i {
+            color: var(--success);
+            font-size: 1.2rem;
+        }
+
+        /* Users */
+        .users-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .user-card {
+            background: white;
+            border-radius: 12px;
+            padding: 35px 25px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .user-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(39, 174, 96, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--accent);
+            font-size: 1.8rem;
+        }
+
+        .user-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        /* Benefits */
+        .benefits {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+        }
+
+        .benefits .section-title h2 {
+            color: white;
+        }
+
+        .benefits .section-title p {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .benefit-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 35px 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .benefit-card i {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 25px;
+        }
+
+        .benefit-card h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        /* GitHub Section */
+        .github-section {
+            background-color: #f8f9fa;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .github-content {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        .github-logo {
+            font-size: 5rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .github-link {
+            display: inline-block;
+            background: #333;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+
+        .github-link:hover {
+            background: #555;
+            transform: translateY(-3px);
+        }
+
+        .github-link i {
+            margin-right: 10px;
+        }
+
         /* Tutorial Page Specific Styles */
         .tutorial-content {
             background: white;
@@ -313,7 +497,6 @@
             word-wrap: break-word;
         }
 
-
         /* Footer */
         footer {
             background: var(--dark);
@@ -362,7 +545,93 @@
             font-size: 0.9rem;
         }
 
+        /* Print Styles */
+        @media print {
+            header, .hero, .btn, .github-link, .github-logo, .benefit-card i, .feature-icon, .user-icon, .cta::before, .case-image {
+                display: none !important;
+            }
+            
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+                padding: 0;
+            }
+            
+            .container {
+                width: 100%;
+                max-width: 100%;
+                padding: 10px;
+            }
+            
+            .section {
+                padding: 20px 0 !important;
+                page-break-inside: avoid;
+            }
+            
+            .section-title h2 {
+                font-size: 18pt;
+            }
+            
+            .section-title h2::after {
+                display: none;
+            }
+            
+            .feature-card, .user-card, .benefit-card, .case-study, .github-content {
+                box-shadow: none;
+                border: 1px solid #ddd;
+                page-break-inside: avoid;
+            }
+            
+            .benefits {
+                background: white !important;
+                color: black !important;
+            }
+            
+            .benefit-card h3 {
+                color: var(--primary) !important;
+            }
+            
+            .hero-content, .cta-content {
+                color: black !important;
+            }
+            
+            .cta {
+                background: white !important;
+            }
+            
+            .cta h2 {
+                color: black !important;
+            }
+            
+            footer {
+                background: white !important;
+                color: black !important;
+                padding: 20px 0;
+            }
+            
+            .footer-links a {
+                color: black !important;
+            }
+            
+            .copyright {
+                border-top: 1px solid #ccc;
+                color: #666 !important;
+            }
+        }
+
         /* Responsive */
+        @media (max-width: 992px) {
+            .case-study {
+                flex-direction: column;
+            }
+            
+            .case-image {
+                width: 100%;
+                min-height: 250px;
+            }
+        }
+
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -372,6 +641,19 @@
             nav ul {
                 flex-wrap: wrap;
                 justify-content: center;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
             }
         }
     </style>
@@ -436,6 +718,130 @@
                             <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
                             <h3>Inteligência de Dados</h3>
                             <p>Análise preditiva para identificar padrões de irregularidades com alta precisão.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Use Cases -->
+            <section id="casos" class="section use-cases">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Casos de Uso</h2>
+                        <p>Exemplos práticos de como o AuditaSocial pode ser aplicado para combater fraudes e promover a integridade.</p>
+                    </div>
+                    <div class="case-study">
+                        <div class="case-image"></div>
+                        <div class="case-content">
+                            <h3>Caso Real: Médico Municipal</h3>
+                            <p>Um município utilizou o AuditaSocial para identificar um médico municipal que recebia o benefício do Bolsa Família, apesar de ter renda superior ao permitido pelo programa.</p>
+                            <p>A ferramenta cruzou automaticamente os dados dos servidores municipais com o cadastro de beneficiários federais, identificando a irregularidade em segundos.</p>
+                            <ul class="impact-list">
+                                <li><i class="fas fa-check-circle"></i> Processo Administrativo Disciplinar (PAD) instaurado</li>
+                                <li><i class="fas fa-check-circle"></i> Cancelamento do benefício irregular</li>
+                                <li><i class="fas fa-check-circle"></i> Benefícios para os cofres públicos</li>
+                                <li><i class="fas fa-check-circle"></i> Recurso realocado para famílias necessitadas</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Users -->
+            <section id="funcionalidades" class="section">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Quem Pode Utilizar</h2>
+                        <p>O AuditaSocial foi desenvolvido para atender diferentes perfis de usuários comprometidos com a integridade pública.</p>
+                    </div>
+                    <div class="users-grid">
+                        <div class="user-card">
+                            <div class="user-icon">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <h3>Controladorias</h3>
+                            <p>Órgãos de controle interno estaduais e municipais para auditoria de folhas de pagamento.</p>
+                        </div>
+                        <div class="user-card">
+                            <div class="user-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3>População</h3>
+                            <p>Cidadãos que desejam fiscalizar a aplicação correta dos recursos públicos.</p>
+                        </div>
+                        <div class="user-card">
+                            <div class="user-icon">
+                                <i class="fas fa-newspaper"></i>
+                            </div>
+                            <h3>Jornalistas</h3>
+                            <p>Profissionais da imprensa em busca de dados para reportagens investigativas.</p>
+                        </div>
+                        <div class="user-card">
+                            <div class="user-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h3>Pesquisadores</h3>
+                            <p>Acadêmicos que estudam políticas públicas e combate à corrupção.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Benefits -->
+            <section id="beneficios" class="section benefits">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Benefícios</h2>
+                        <p>Conheça as vantagens de implementar o AuditaSocial em sua organização.</p>
+                    </div>
+                    <div class="benefits-grid">
+                        <div class="benefit-card">
+                            <i class="fas fa-hand-holding-usd"></i>
+                            <h3>Economia de Recursos</h3>
+                            <p>Recuperação de recursos públicos desviados e realocação para quem realmente precisa.</p>
+                        </div>
+                        <div class="benefit-card">
+                            <i class="fas fa-user-shield"></i>
+                            <h3>Controle Social</h3>
+                            <p>Fortalecimento da participação cidadã no acompanhamento das políticas públicas.</p>
+                        </div>
+                        <div class="benefit-card">
+                            <i class="fas fa-gavel"></i>
+                            <h3>Integridade Pública</h3>
+                            <p>Promoção de uma cultura de ética e transparência no serviço público.</p>
+                        </div>
+                        <div class="benefit-card">
+                            <i class="fas fa-sync-alt"></i>
+                            <h3>Eficiência Operacional</h3>
+                            <p>Automatização de processos complexos mesmo para municípios com poucos recursos técnicos.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- GitHub Section -->
+            <section id="github" class="section github-section">
+                <div class="container">
+                    <div class="github-content">
+                        <div class="github-logo">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <h2>Acesse o Código Fonte</h2>
+                        <p>O AuditaSocial é um software de código aberto disponível gratuitamente no GitHub. Contribua com o projeto ou utilize em sua organização.</p>
+                        
+                        <a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais" class="github-link" target="_blank">
+                            <i class="fab fa-github"></i> Repositório no GitHub
+                        </a>
+                        
+                        <div style="margin-top: 40px; background: #f0f4f9; padding: 20px; border-radius: 10px; text-align: left;">
+                            <h3>Como Utilizar:</h3>
+                            <ol style="margin-top: 15px; padding-left: 20px;">
+                                <li style="margin-bottom: 10px;">Clone o repositório em sua máquina</li>
+                                <li style="margin-bottom: 10px;">Siga as instruções de instalação no README.md</li>
+                                <li style="margin-bottom: 10px;">Importe as bases de dados necessárias</li>
+                                <li style="margin-bottom: 10px;">Execute o script de cruzamento de dados</li>
+                                <li>Analise os resultados e tome as medidas necessárias</li>
+                            </ol>
                         </div>
                     </div>
                 </div>
@@ -533,6 +939,7 @@
             </div>
             <div class="copyright">
                 <p>© 2025 AuditaSocial. LIMA, Caio; PERRUCCI, Marcelo L.; e FREITAS, Rafael.</p>
+                <p style="margin-top: 10px;">Última versão disponível em <a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais" style="color: var(--accent);">https://github.com/CaioSobreira/cruzamento_servidores_bases_federais</a></p>
             </div>
         </div>
     </footer>
