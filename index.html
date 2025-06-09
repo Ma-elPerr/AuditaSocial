@@ -64,6 +64,7 @@
             display: flex;
             align-items: center;
             gap: 15px;
+            cursor: pointer;
         }
 
         .logo i {
@@ -88,6 +89,7 @@
             font-weight: 500;
             font-size: 1.1rem;
             transition: color 0.3s;
+            cursor: pointer;
         }
 
         nav a:hover {
@@ -112,16 +114,13 @@
             transform: translateY(-3px);
             box-shadow: 0 6px 15px rgba(39, 174, 96, 0.35);
         }
-
-        .btn-outline {
-            background: transparent;
-            border: 2px solid white;
-            box-shadow: none;
+        
+        /* General Page Styles */
+        .page {
+            display: none; /* Pages are hidden by default */
         }
-
-        .btn-outline:hover {
-            background: white;
-            color: var(--primary);
+        .page.active {
+            display: block; /* The active page is shown */
         }
 
         /* Hero Section */
@@ -232,223 +231,95 @@
             font-size: 1.5rem;
         }
 
-        /* Use Cases */
-        .use-cases {
-            background-color: #f0f4f9;
-        }
-
-        .case-study {
-            display: flex;
-            align-items: center;
-            gap: 50px;
-            margin-bottom: 60px;
+        /* Tutorial Page Specific Styles */
+        .tutorial-content {
             background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-        }
-
-        .case-image {
-            flex: 1;
-            min-height: 300px;
-            background: url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .case-content {
-            flex: 1;
             padding: 40px;
-        }
-
-        .case-content h3 {
-            color: var(--accent);
-            margin-bottom: 15px;
-            font-size: 1.8rem;
-        }
-
-        .case-content p {
-            margin-bottom: 20px;
-        }
-
-        .impact-list {
-            list-style: none;
-            margin-top: 25px;
-        }
-
-        .impact-list li {
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            gap: 10px;
-        }
-
-        .impact-list i {
-            color: var(--success);
-            font-size: 1.2rem;
-        }
-
-        /* Users */
-        .users-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .user-card {
-            background: white;
             border-radius: 12px;
-            padding: 35px 25px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
         }
 
-        .user-icon {
-            width: 70px;
-            height: 70px;
-            background: rgba(39, 174, 96, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            color: var(--accent);
-            font-size: 1.8rem;
-        }
-
-        .user-card h3 {
+        .tutorial-content h3 {
+            margin-top: 30px;
             margin-bottom: 15px;
-            font-size: 1.4rem;
+            font-size: 1.6rem;
+            color: var(--secondary);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 5px;
         }
-
-        /* Benefits */
-        .benefits {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-        }
-
-        .benefits .section-title h2 {
-            color: white;
-        }
-
-        .benefits .section-title p {
-            color: rgba(255,255,255,0.8);
-        }
-
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .benefit-card {
-            background: rgba(255,255,255,0.1);
-            border-radius: 12px;
-            padding: 35px 30px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.15);
-        }
-
-        .benefit-card i {
-            font-size: 3rem;
-            color: var(--accent);
-            margin-bottom: 25px;
-        }
-
-        .benefit-card h3 {
-            color: white;
+        
+        .tutorial-content p, .tutorial-content li {
+            color: #555;
             margin-bottom: 15px;
         }
 
-        /* CTA */
-        .cta {
-            text-align: center;
-            padding: 80px 0;
-            background: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center;
-            background-size: cover;
-            position: relative;
-        }
-
-        .cta::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(26, 58, 108, 0.85);
-        }
-
-        .cta-content {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
-            margin: 0 auto;
-            color: white;
-        }
-
-        .cta h2 {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-            color: white;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-
-        /* GitHub Section */
-        .github-section {
-            background-color: #f8f9fa;
-            padding: 60px 0;
-            text-align: center;
-        }
-
-        .github-content {
-            background: white;
-            border-radius: 15px;
-            padding: 40px;
-            max-width: 800px;
-            margin: 0 auto;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-        }
-
-        .github-logo {
-            font-size: 5rem;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        .github-link {
-            display: inline-block;
-            background: #333;
-            color: white;
-            padding: 15px 40px;
-            border-radius: 50px;
+        .tutorial-content a {
+            color: var(--accent);
             text-decoration: none;
             font-weight: 600;
-            font-size: 1.2rem;
-            margin-top: 20px;
-            transition: all 0.3s;
+        }
+        
+        .tutorial-content a:hover {
+            text-decoration: underline;
         }
 
-        .github-link:hover {
-            background: #555;
-            transform: translateY(-3px);
+        .tutorial-content ol {
+            list-style: none; /* Removing default numbers to add them manually */
+            padding-left: 0;
+        }
+        
+        .tutorial-content li {
+           padding-left: 2em;
+           position: relative;
+        }
+        
+        .tutorial-content li::before {
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .step-group {
+            counter-reset: step-counter;
+        }
+        
+        .step-group > li {
+            counter-increment: step-counter;
+        }
+        
+        .step-group > li::before {
+            content: counter(step-counter) ". ";
         }
 
-        .github-link i {
-            margin-right: 10px;
+        .tutorial-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 1px solid #ddd;
         }
+        
+        .code-block {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 20px 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
 
         /* Footer */
         footer {
             background: var(--dark);
             color: white;
             padding: 60px 0 30px;
+            margin-top: 50px;
         }
 
         .footer-content {
@@ -466,6 +337,7 @@
 
         .footer-links {
             list-style: none;
+            padding: 0;
         }
 
         .footer-links li {
@@ -490,93 +362,7 @@
             font-size: 0.9rem;
         }
 
-        /* Print Styles */
-        @media print {
-            header, .hero, .btn, .github-link, .github-logo, .benefit-card i, .feature-icon, .user-icon, .cta::before, .case-image {
-                display: none !important;
-            }
-            
-            body {
-                background: white;
-                color: black;
-                font-size: 12pt;
-                padding: 0;
-            }
-            
-            .container {
-                width: 100%;
-                max-width: 100%;
-                padding: 10px;
-            }
-            
-            .section {
-                padding: 20px 0 !important;
-                page-break-inside: avoid;
-            }
-            
-            .section-title h2 {
-                font-size: 18pt;
-            }
-            
-            .section-title h2::after {
-                display: none;
-            }
-            
-            .feature-card, .user-card, .benefit-card, .case-study, .github-content {
-                box-shadow: none;
-                border: 1px solid #ddd;
-                page-break-inside: avoid;
-            }
-            
-            .benefits {
-                background: white !important;
-                color: black !important;
-            }
-            
-            .benefit-card h3 {
-                color: var(--primary) !important;
-            }
-            
-            .hero-content, .cta-content {
-                color: black !important;
-            }
-            
-            .cta {
-                background: white !important;
-            }
-            
-            .cta h2 {
-                color: black !important;
-            }
-            
-            footer {
-                background: white !important;
-                color: black !important;
-                padding: 20px 0;
-            }
-            
-            .footer-links a {
-                color: black !important;
-            }
-            
-            .copyright {
-                border-top: 1px solid #ccc;
-                color: #666 !important;
-            }
-        }
-
         /* Responsive */
-        @media (max-width: 992px) {
-            .case-study {
-                flex-direction: column;
-            }
-            
-            .case-image {
-                width: 100%;
-                min-height: 250px;
-            }
-        }
-
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -587,19 +373,6 @@
                 flex-wrap: wrap;
                 justify-content: center;
             }
-            
-            .hero h2 {
-                font-size: 2.2rem;
-            }
-            
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .section-title h2 {
-                font-size: 2rem;
-            }
         }
     </style>
 </head>
@@ -608,211 +381,145 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <div class="logo">
+                <div class="logo" onclick="showPage('home')">
                     <i class="fas fa-shield-alt"></i>
                     <h1>AuditaSocial</h1>
                 </div>
                 <nav>
                     <ul>
-                        <li><a href="#sobre">Sobre</a></li>
-                        <li><a href="#funcionalidades">Funcionalidades</a></li>
-                        <li><a href="#casos">Casos de Uso</a></li>
-                        <li><a href="#beneficios">Benefícios</a></li>
-                        <li><a href="#github">Código Fonte</a></li>
+                        <li><a onclick="showPage('home')">Sobre</a></li>
+                        <li><a onclick="showPage('tutorial')">Tutorial</a></li>
+                        <li><a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais" target="_blank">Código Fonte</a></li>
                     </ul>
                 </nav>
-                <a href="#github" class="btn">Acessar Código</a>
+                <a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais" class="btn" target="_blank">Acessar Código</a>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h2>Ferramenta de Auditoria Social</h2>
-                <p>Solução aberta para identificação de irregularidades no cruzamento de servidores públicos e beneficiários de programas federais.</p>
-                <div class="hero-buttons">
-                    <a href="#github" class="btn">Acessar GitHub</a>
-                    <a href="#funcionalidades" class="btn btn-outline">Ver Funcionalidades</a>
+    <main>
+        <!-- Home Page Content -->
+        <div id="page-home" class="page active">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="container">
+                    <div class="hero-content">
+                        <h2>Ferramenta de Auditoria Social</h2>
+                        <p>Solução aberta para identificação de irregularidades no cruzamento de servidores públicos e beneficiários de programas federais.</p>
+                        <div class="hero-buttons">
+                            <a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais" target="_blank" class="btn">Acessar GitHub</a>
+                            <a onclick="showPage('tutorial')" class="btn btn-outline">Ver Tutorial</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
-    <!-- Features -->
-    <section id="sobre" class="section">
-        <div class="container">
-            <div class="section-title">
-                <h2>Sobre a Ferramenta</h2>
-                <p>AuditaSocial é uma solução inovadora que permite a identificação de possíveis fraudes através do cruzamento de dados entre servidores públicos e beneficiários de programas sociais.</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-search"></i>
+            <!-- Features -->
+            <section id="sobre" class="section">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Sobre a Ferramenta</h2>
+                        <p>AuditaSocial é uma solução inovadora que permite a identificação de possíveis fraudes através do cruzamento de dados entre servidores públicos e beneficiários de programas sociais.</p>
                     </div>
-                    <h3>Auditoria Automatizada</h3>
-                    <p>Cruzamento automático de dados entre folhas de pagamento de servidores públicos e cadastros de beneficiários de programas federais.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-balance-scale"></i>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-search"></i></div>
+                            <h3>Auditoria Automatizada</h3>
+                            <p>Cruzamento automático de dados entre folhas de pagamento e cadastros de beneficiários.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-balance-scale"></i></div>
+                            <h3>Conformidade Legal</h3>
+                            <p>Baseado na Lei de Acesso à Informação e alinhado com as melhores práticas de integridade pública.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                            <h3>Inteligência de Dados</h3>
+                            <p>Análise preditiva para identificar padrões de irregularidades com alta precisão.</p>
+                        </div>
                     </div>
-                    <h3>Conformidade Legal</h3>
-                    <p>Baseado na Lei de Acesso à Informação (LAI - Lei 12.527) e alinhado com as melhores práticas de integridade pública.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Inteligência de Dados</h3>
-                    <p>Análise preditiva e algoritmos inteligentes para identificar padrões de irregularidades com alta precisão.</p>
-                </div>
-            </div>
+            </section>
         </div>
-    </section>
 
-    <!-- Use Cases -->
-    <section id="casos" class="section use-cases">
-        <div class="container">
-            <div class="section-title">
-                <h2>Casos de Uso</h2>
-                <p>Exemplos práticos de como o AuditaSocial pode ser aplicado para combater fraudes e promover a integridade.</p>
-            </div>
-            <div class="case-study">
-                <div class="case-image"></div>
-                <div class="case-content">
-                    <h3>Caso Real: Médico Municipal</h3>
-                    <p>Dentre os servidores identificados em cruzamento similar, um município identificou um médico municipal que recebia o benefício do Bolsa Família, apesar de ter renda superior ao permitido pelo programa.</p>
-                    <p>A ferramenta cruzou automaticamente os dados dos servidores municipais com o cadastro de beneficiários federais, identificando a irregularidade em segundos.</p>
-                    <ul class="impact-list">
-                        <li><i class="fas fa-check-circle"></i> Processo Administrativo Disciplinar (PAD) instaurado</li>
-                        <li><i class="fas fa-check-circle"></i> Cancelamento do benefício irregular</li>
-                        <li><i class="fas fa-check-circle"></i> Benefícios para os cofres públicos</li>
-                        <li><i class="fas fa-check-circle"></i> Recurso realocado para famílias necessitadas</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+        <!-- Tutorial Page Content -->
+        <div id="page-tutorial" class="page">
+            <section class="section">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Guia de Instalação e Uso</h2>
+                        <p>Siga os passos abaixo para configurar e executar a ferramenta AuditaSocial em sua máquina.</p>
+                    </div>
+                    <div class="tutorial-content">
+                        <h3>1. Instalar o Docker Desktop</h3>
+                        <ol class="step-group">
+                            <li>Acesse o site oficial e baixe o instalador: <a href="https://www.docker.com/products/docker-desktop/" target="_blank">Docker Desktop</a>.</li>
+                            <li>Clique em <strong>Download Docker Desktop</strong> para o seu sistema operacional (ex: Windows).</li>
+                            <img src="https://raw.githubusercontent.com/CaioSobreira/cruzamento_servidores_bases_federais/main/images/image2.png" alt="Página de download do Docker Desktop" onerror="this.onerror=null;this.src='https://placehold.co/624x250/eeeeee/333333?text=Imagem+N%C3%A3o+Encontrada';">
+                            <li>Após o download, execute o instalador "Docker Desktop Installer" com as configurações recomendadas. Reinicie o computador se for solicitado.</li>
+                            <img src="https://raw.githubusercontent.com/CaioSobreira/cruzamento_servidores_bases_federais/main/images/image10.png" alt="Instalador do Docker" onerror="this.onerror=null;this.src='https://placehold.co/624x433/eeeeee/333333?text=Imagem+N%C3%A3o+Encontrada';">
+                            <li>Crie uma conta Docker ou faça login usando sua conta Google/GitHub.</li>
+                            <li>Abra o Docker Desktop, vá em <strong>Settings (ícone de engrenagem) > Resources > Network</strong> e habilite a opção <strong>"Enable host Network"</strong>. Salve as alterações.</li>
+                            <li>Deixe o Docker Desktop rodando em segundo plano.</li>
+                            <img src="https://raw.githubusercontent.com/CaioSobreira/cruzamento_servidores_bases_federais/main/images/image8.png" alt="Docker em execução" onerror="this.onerror=null;this.src='https://placehold.co/624x378/eeeeee/333333?text=Imagem+N%C3%A3o+Encontrada';">
+                        </ol>
 
-    <!-- Users -->
-    <section id="funcionalidades" class="section">
-        <div class="container">
-            <div class="section-title">
-                <h2>Quem Pode Utilizar</h2>
-                <p>O AuditaSocial foi desenvolvido para atender diferentes perfis de usuários comprometidos com a integridade pública.</p>
-            </div>
-            <div class="users-grid">
-                <div class="user-card">
-                    <div class="user-icon">
-                        <i class="fas fa-building"></i>
-                    </div>
-                    <h3>Controladorias</h3>
-                    <p>Órgãos de controle interno estaduais e municipais para auditoria de folhas de pagamento.</p>
-                </div>
-                <div class="user-card">
-                    <div class="user-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3>População</h3>
-                    <p>Cidadãos que desejam fiscalizar a aplicação correta dos recursos públicos.</p>
-                </div>
-                <div class="user-card">
-                    <div class="user-icon">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <h3>Jornalistas</h3>
-                    <p>Profissionais da imprensa em busca de dados para reportagens investigativas.</p>
-                </div>
-                <div class="user-card">
-                    <div class="user-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <h3>Pesquisadores</h3>
-                    <p>Acadêmicos que estudam políticas públicas e combate à corrupção.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+                        <h3>2. Baixar a Ferramenta AuditaSocial</h3>
+                        <ol class="step-group">
+                            <li>Acesse o repositório: <a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais" target="_blank">AuditaSocial no GitHub</a>.</li>
+                            <li>Clique no botão verde <strong>"&lt;&gt; Code"</strong> e selecione <strong>"Download ZIP"</strong>.</li>
+                            <img src="https://raw.githubusercontent.com/CaioSobreira/cruzamento_servidores_bases_federais/main/images/image1.png" alt="Botão de download do código no GitHub" onerror="this.onerror=null;this.src='https://placehold.co/415x150/eeeeee/333333?text=Imagem+N%C3%A3o+Encontrada';">
+                            <li>Extraia o conteúdo do arquivo ZIP para uma pasta de sua preferência.</li>
+                             <img src="https://raw.githubusercontent.com/CaioSobreira/cruzamento_servidores_bases_federais/main/images/image6.png" alt="Arquivos extraídos" onerror="this.onerror=null;this.src='https://placehold.co/624x368/eeeeee/333333?text=Imagem+N%C3%A3o+Encontrada';">
+                        </ol>
 
-    <!-- Benefits -->
-    <section id="beneficios" class="section benefits">
-        <div class="container">
-            <div class="section-title">
-                <h2>Benefícios</h2>
-                <p>Conheça as vantagens de implementar o AuditaSocial em sua organização.</p>
-            </div>
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <i class="fas fa-hand-holding-usd"></i>
-                    <h3>Economia de Recursos</h3>
-                    <p>Recuperação de recursos públicos desviados e realocação para quem realmente precisa.</p>
-                </div>
-                <div class="benefit-card">
-                    <i class="fas fa-user-shield"></i>
-                    <h3>Controle Social</h3>
-                    <p>Fortalecimento da participação cidadã no acompanhamento das políticas públicas.</p>
-                </div>
-                <div class="benefit-card">
-                    <i class="fas fa-gavel"></i>
-                    <h3>Integridade Pública</h3>
-                    <p>Promoção de uma cultura de ética e transparência no serviço público.</p>
-                </div>
-                <div class="benefit-card">
-                    <i class="fas fa-sync-alt"></i>
-                    <h3>Eficiência Operacional</h3>
-                    <p>Automatização de processos complexos mesmo para municípios com poucos recursos técnicos.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+                        <h3>3. Rodando o Código</h3>
+                        <ol class="step-group">
+                            <li>Abra a pasta onde você extraiu os arquivos. Clique com o botão direito do mouse dentro da pasta e selecione "Abrir no Terminal" (ou "Open in Terminal").</li>
+                             <img src="https://raw.githubusercontent.com/CaioSobreira/cruzamento_servidores_bases_federais/main/images/image11.png" alt="Menu para abrir no terminal" onerror="this.onerror=null;this.src='https://placehold.co/624x428/eeeeee/333333?text=Imagem+N%C3%A3o+Encontrada';">
+                            <li>No terminal que se abriu, digite o comando abaixo e pressione Enter. (Você receberá uma mensagem de erro se o Docker não estiver aberto).</li>
+                        </ol>
+                        <div class="code-block">docker compose up</div>
+                        <img src="https://raw.githubusercontent.com/CaioSobreira/cruzamento_servidores_bases_federais/main/images/image3.png" alt="Comando docker compose up no terminal" onerror="this.onerror=null;this.src='https://placehold.co/624x132/eeeeee/333333?text=Imagem+N%C3%A3o+Encontrada';">
+                        <ol class="step-group" start="3">
+                             <li>Aguarde o processo terminar. A confirmação aparecerá no terminal quando estiver pronto.</li>
+                             <img src="https://raw.githubusercontent.com/CaioSobreira/cruzamento_servidores_bases_federais/main/images/image7.png" alt="Mensagem de sucesso no terminal" onerror="this.onerror=null;this.src='https://placehold.co/624x53/eeeeee/333333?text=Imagem+N%C3%A3o+Encontrada';">
+                            <li>Volte para a pasta do sistema e dê um duplo clique no atalho <strong>"Iniciar Sistema AuditaSocial"</strong>.</li>
+                             <img src="https://raw.githubusercontent.com/CaioSobreira/cruzamento_servidores_bases_federais/main/images/image4.png" alt="Atalho para iniciar o sistema" onerror="this.onerror=null;this.src='https://placehold.co/624x173/eeeeee/333333?text=Imagem+N%C3%A3o+Encontrada';">
+                        </ol>
 
-    <!-- GitHub Section -->
-    <section id="github" class="section github-section">
-        <div class="container">
-            <div class="github-content">
-                <div class="github-logo">
-                    <i class="fab fa-github"></i>
+                        <h3>4. Usando o Sistema AuditaSocial</h3>
+                        <ol class="step-group">
+                            <li>Clique no botão para <strong>Atualização de Bases Sociais</strong> e aguarde o preenchimento dos dados.</li>
+                            <img src="https://raw.githubusercontent.com/CaioSobreira/cruzamento_servidores_bases_federais/main/images/image5.png" alt="Interface principal do sistema AuditaSocial" onerror="this.onerror=null;this.src='https://placehold.co/447x505/eeeeee/333333?text=Imagem+N%C3%A3o+Encontrada';">
+                            <p>Aguarde até que todas as bases sociais sejam preenchidas na planilha abaixo.</p>
+                            <img src="https://raw.githubusercontent.com/CaioSobreira/cruzamento_servidores_bases_federais/main/images/image9.png" alt="Tabela de bases sociais sendo preenchida" onerror="this.onerror=null;this.src='https://placehold.co/624x162/eeeeee/333333?text=Imagem+N%C3%A3o+Encontrada';">
+                            <li>Selecione o seu arquivo contendo as informações dos servidores a serem consultados. (Caso necessário, faça o download de um documento modelo).</li>
+                            <li><strong>Importante:</strong> sua planilha deve conter as mesmas cinco colunas que as planilhas modelo.</li>
+                            <li>Clique em <strong>Executar o Cruzamento</strong>.</li>
+                            <li>Caso queira, clique em <strong>Fazer o download do resultado</strong> para obter uma planilha com os casos positivos identificados.</li>
+                        </ol>
+
+                    </div>
                 </div>
-                <h2>Acesse o Código Fonte</h2>
-                <p>O AuditaSocial é um software de código aberto disponível gratuitamente no GitHub. Contribua com o projeto ou utilize em sua organização.</p>
-                
-                <a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais" class="github-link" target="_blank">
-                    <i class="fab fa-github"></i> Repositório no GitHub
-                </a>
-                
-                <div style="margin-top: 40px; background: #f0f4f9; padding: 20px; border-radius: 10px; text-align: left;">
-                    <h3>Como Utilizar:</h3>
-                    <ol style="margin-top: 15px; padding-left: 20px;">
-                        <li style="margin-bottom: 10px;">Clone o repositório em sua máquina</li>
-                        <li style="margin-bottom: 10px;">Siga as instruções de instalação no README.md</li>
-                        <li style="margin-bottom: 10px;">Importe as bases de dados necessárias</li>
-                        <li style="margin-bottom: 10px;">Execute o script de cruzamento de dados</li>
-                        <li>Analise os resultados e tome as medidas necessárias</li>
-                    </ol>
-                </div>
-            </div>
+            </section>
         </div>
-    </section>
+    </main>
 
     <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-column">
+                 <div class="footer-column">
                     <h3>AuditaSocial</h3>
                     <p>Solução tecnológica para identificação de irregularidades no cruzamento de servidores públicos e beneficiários de programas federais.</p>
                 </div>
                 <div class="footer-column">
                     <h3>Links Rápidos</h3>
                     <ul class="footer-links">
-                        <li><a href="#sobre">Sobre a Ferramenta</a></li>
-                        <li><a href="#funcionalidades">Funcionalidades</a></li>
-                        <li><a href="#casos">Casos de Uso</a></li>
-                        <li><a href="#beneficios">Benefícios</a></li>
-                        <li><a href="#github">Código Fonte</a></li>
+                        <li><a onclick="showPage('home')">Sobre a Ferramenta</a></li>
+                        <li><a onclick="showPage('tutorial')">Tutorial</a></li>
+                        <li><a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais" target="_blank">Código Fonte</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
@@ -820,16 +527,36 @@
                     <ul class="footer-links">
                         <li><a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais" target="_blank">Documentação</a></li>
                         <li><a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais/issues" target="_blank">Reportar Problema</a></li>
-                        <li><a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais/pulls" target="_blank">Contribuir</a></li>
                         <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12527.htm" target="_blank">Lei de Acesso à Informação</a></li>
                     </ul>
                 </div>
             </div>
             <div class="copyright">
                 <p>© 2025 AuditaSocial. LIMA, Caio; PERRUCCI, Marcelo L.; e FREITAS, Rafael.</p>
-                <p style="margin-top: 10px;">Última versão disponível em <a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais" style="color: var(--accent);">https://github.com/CaioSobreira/cruzamento_servidores_bases_federais</a></p>
             </div>
         </div>
     </footer>
+
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.style.display = 'none';
+            });
+
+            // Show the selected page
+            const selectedPage = document.getElementById('page-' + pageId);
+            if (selectedPage) {
+                selectedPage.style.display = 'block';
+            }
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Set the initial page to be 'home'
+        document.addEventListener('DOMContentLoaded', () => {
+            showPage('home');
+        });
+    </script>
 </body>
 </html>
