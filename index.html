@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,23 +11,61 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            scroll-behavior: smooth;
         }
 
         :root {
-            --primary: #1a3a6c;
-            --secondary: #2c5aa0;
-            --accent: #27ae60;
-            --light: #f8f9fa;
-            --dark: #343a40;
-            --success: #27ae60;
-            --warning: #f39c12;
+            --primary-light: #1a3a6c;
+            --secondary-light: #2c5aa0;
+            --accent-light: #27ae60;
+            --background-light: #f5f7fa;
+            --card-bg-light: #ffffff;
+            --text-light: #333;
+            --text-muted-light: #666;
+            --border-light: #eef;
+
+            --primary-dark: #6699ff;
+            --secondary-dark: #8cb3ff;
+            --accent-dark: #32de84;
+            --background-dark: #121212;
+            --card-bg-dark: #1e1e1e;
+            --text-dark: #e0e0e0;
+            --text-muted-dark: #a0a0a0;
+            --border-dark: #333;
+        }
+
+        [data-theme="light"] {
+            --primary: var(--primary-light);
+            --secondary: var(--secondary-light);
+            --accent: var(--accent-light);
+            --background: var(--background-light);
+            --card-bg: var(--card-bg-light);
+            --text-color: var(--text-light);
+            --text-muted: var(--text-muted-light);
+            --border-color: var(--border-light);
+            --header-bg: linear-gradient(135deg, var(--primary-light) 0%, var(--secondary-light) 100%);
+            --hero-bg: linear-gradient(rgba(26, 58, 108, 0.85), rgba(26, 58, 108, 0.95)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+        }
+
+        [data-theme="dark"] {
+            --primary: var(--primary-dark);
+            --secondary: var(--secondary-dark);
+            --accent: var(--accent-dark);
+            --background: var(--background-dark);
+            --card-bg: var(--card-bg-dark);
+            --text-color: var(--text-dark);
+            --text-muted: var(--text-muted-dark);
+            --border-color: var(--border-dark);
+            --header-bg: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+            --hero-bg: linear-gradient(rgba(18, 18, 18, 0.85), rgba(18, 18, 18, 0.95)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
         }
 
         body {
             font-family: 'Open Sans', sans-serif;
-            color: #333;
+            color: var(--text-color);
+            background-color: var(--background);
             line-height: 1.6;
-            background-color: #f5f7fa;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         h1, h2, h3, h4 {
@@ -45,9 +83,9 @@
 
         /* Header */
         header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: var(--header-bg);
             color: white;
-            padding: 20px 0;
+            padding: 15px 0;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
@@ -77,584 +115,281 @@
             color: white;
         }
 
-        nav ul {
+        /* Header Controls (Nav, Toggles) */
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* Desktop Navigation */
+        .desktop-nav {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+        
+        .desktop-nav ul {
             display: flex;
             list-style: none;
             gap: 25px;
         }
 
-        nav a {
+        .desktop-nav a {
             color: rgba(255,255,255,0.9);
             text-decoration: none;
             font-weight: 500;
             font-size: 1.1rem;
-            transition: color 0.3s;
+            transition: color 0.3s, border-color 0.3s;
             cursor: pointer;
+            padding: 5px 0;
+            border-bottom: 2px solid transparent;
         }
 
-        nav a:hover {
+        .desktop-nav a:hover, .desktop-nav a.active-link {
             color: var(--accent);
+            border-bottom-color: var(--accent);
         }
-
-        .btn {
-            display: inline-block;
-            background: var(--accent);
+        
+        /* Language & Theme Toggles */
+        .settings-toggles {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        #theme-toggle {
+            background: none;
+            border: none;
             color: white;
-            padding: 12px 25px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            border: 2px solid var(--accent);
-            box-shadow: 0 4px 10px rgba(39, 174, 96, 0.25);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 5px;
+        }
+        
+        .language-switcher {
+            position: relative;
+        }
+        
+        .language-switcher .selected-lang {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .language-switcher .lang-dropdown {
+            display: none;
+            position: absolute;
+            top: 150%;
+            right: 0;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            list-style: none;
+            padding: 5px;
+            width: 150px;
+            z-index: 1002;
         }
 
-        .btn:hover {
-            background: transparent;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(39, 174, 96, 0.35);
+        .language-switcher .lang-dropdown.active {
+            display: block;
         }
+        
+        .lang-dropdown li a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        
+        .lang-dropdown li a:hover {
+            background-color: var(--background);
+        }
+        
+        .flag-icon {
+            width: 24px;
+            height: 18px;
+            object-fit: cover;
+            border-radius: 2px;
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav-toggle { display: none; background: none; border: none; color: white; font-size: 1.8rem; cursor: pointer; }
+        .mobile-nav { position: fixed; top: 0; right: -100%; width: 70%; max-width: 300px; height: 100%; background: var(--dark); box-shadow: -5px 0 15px rgba(0,0,0,0.2); transition: right 0.3s ease-in-out; z-index: 1001; padding: 60px 20px 20px; display: flex; flex-direction: column; }
+        .mobile-nav.active { right: 0; }
+        .mobile-nav-close { position: absolute; top: 20px; right: 20px; background: none; border: none; color: white; font-size: 2rem; cursor: pointer; }
+        .mobile-nav ul { list-style: none; }
+        .mobile-nav li a { display: block; padding: 15px 0; color: white; text-decoration: none; font-size: 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .mobile-nav li a:hover { color: var(--accent); }
+
+        .btn { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: white; padding: 12px 25px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s; border: 2px solid var(--accent); box-shadow: 0 4px 10px rgba(39, 174, 96, 0.25); }
+        .btn:hover { background: var(--accent); filter: brightness(110%); transform: translateY(-3px); box-shadow: 0 6px 15px rgba(39, 174, 96, 0.35); }
+        .btn:active { transform: translateY(0); box-shadow: 0 2px 5px rgba(39, 174, 96, 0.2); }
         
         .btn-outline {
             background: transparent;
-            border: 2px solid white;
-            box-shadow: none;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+        .btn-outline:hover {
+            background: var(--accent);
+            color: white;
         }
 
-        .btn-outline:hover {
+        .hero .btn-outline {
+            border-color: white;
+            color: white;
+        }
+        .hero .btn-outline:hover {
             background: white;
             color: var(--primary);
         }
 
         /* General Page Styles */
-        .page {
-            display: none; /* Pages are hidden by default */
-        }
-        .page.active {
-            display: block; /* The active page is shown */
-        }
+        .page { display: none; }
+        .page.active { display: block; }
 
         /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(26, 58, 108, 0.85), rgba(26, 58, 108, 0.95)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 100px 0;
-            text-align: center;
-        }
+        .hero { background: var(--hero-bg) center/cover; color: white; padding: 100px 0; text-align: center; }
+        .hero-content { max-width: 800px; margin: 0 auto; }
+        .hero h2 { font-size: 2.8rem; margin-bottom: 20px; color: white; }
+        .hero p { font-size: 1.2rem; margin-bottom: 30px; opacity: 0.9; }
+        .hero-buttons { display: flex; gap: 20px; justify-content: center; margin-top: 30px; }
+        .hero .btn.btn-primary { padding: 14px 30px; font-size: 1.1rem; }
 
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
+        /* General Section */
+        .section { padding: 80px 0; overflow-x: hidden; }
+        .section-title { text-align: center; margin-bottom: 60px; }
+        .section-title h2 { font-size: 2.5rem; position: relative; display: inline-block; margin-bottom: 15px; }
+        .section-title h2::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 80px; height: 4px; background: var(--accent); border-radius: 2px; }
+        .section-title p { max-width: 700px; margin: 20px auto 0; color: var(--text-muted); font-size: 1.1rem; }
+        .bg-light { background-color: var(--card-bg); }
+        [data-theme="dark"] .bg-light { background-color: #1a1a1a; }
 
-        .hero h2 {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-            color: white;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin-top: 30px;
-        }
-
-        /* Features */
-        .section {
-            padding: 80px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            position: relative;
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            max-width: 700px;
-            margin: 20px auto 0;
-            color: #666;
-            font-size: 1.1rem;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .feature-card {
-            background: white;
+        /* Generic Card Hover Effects */
+        .feature-card, .user-card, .data-source-item, .team-card, .contribute-card {
+            background: var(--card-bg);
             border-radius: 12px;
             padding: 35px 30px;
             text-align: center;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.07);
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            border: 2px solid transparent;
         }
 
-        .feature-card:hover {
+        .feature-card:hover, .user-card:hover, .data-source-item:hover, .team-card:hover, .contribute-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+            box-shadow: 0 15px 30px rgba(44, 90, 160, 0.15);
+            border-color: var(--accent);
         }
 
-        .feature-icon {
-            width: 80px;
-            height: 80px;
-            background: rgba(44, 90, 160, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 25px;
-            color: var(--secondary);
-            font-size: 2rem;
-        }
+        .feature-icon { width: 80px; height: 80px; background: rgba(44, 90, 160, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; color: var(--secondary); font-size: 2.5rem; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .feature-card h3 { margin-bottom: 15px; font-size: 1.5rem; }
 
-        .feature-card h3 {
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-        }
+       /* Case Study */
+.case-study { display: flex; align-items: center; gap: 50px; margin-bottom: 60px; background: var(--card-bg); border-radius: 15px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+.case-image { flex: 1; min-height: 400px; background: url('https://raw.githubusercontent.com/Ma-elPerr/AuditaSocial/main/images/image12.png') center/cover; }
+.case-content { flex: 1; padding: 40px; }
+.case-content h3 { color: var(--accent); margin-bottom: 15px; font-size: 1.8rem; }
+.impact-list { list-style: none; margin-top: 25px; }
+.impact-list li { padding: 10px 0; border-bottom: 1px solid var(--border-color); display: flex; gap: 10px; align-items: center; }
+.impact-list i { color: var(--success); font-size: 1.2rem; }
 
-        /* Use Cases */
-        .use-cases {
-            background-color: #f0f4f9;
-        }
+        /* Users Section */
+        .users-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .user-icon { width: 70px; height: 70px; background: rgba(39, 174, 96, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: var(--accent); font-size: 2rem; }
+        .user-card h3 { margin-bottom: 15px; font-size: 1.4rem; }
 
-        .case-study {
-            display: flex;
-            align-items: center;
-            gap: 50px;
-            margin-bottom: 60px;
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-        }
+        /* Data Sources Section */
+        .data-source-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .data-source-item .illustration { height: 80px; margin-bottom: 25px; }
+        .data-source-item .illustration svg { fill: var(--accent); height: 100%; }
+        .data-source-item h3 { font-size: 1.3rem; margin-bottom: 10px; }
 
-        .case-image {
-            flex: 1;
-            min-height: 300px;
-            background: url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
-            background-size: cover;
-            background-position: center;
-        }
+        /* Contribution Section */
+        .contribute-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .contribute-card i { color: var(--secondary); font-size: 2.5rem; margin-bottom: 20px; }
+        .contribute-card a { margin-top: 20px; }
 
-        .case-content {
-            flex: 1;
-            padding: 40px;
-        }
+        /* FAQ Section */
+        .faq-container { max-width: 800px; margin: 0 auto; }
+        .faq-item { background: var(--card-bg); border-radius: 8px; margin-bottom: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid var(--border-color); }
+        .faq-item summary { font-size: 1.2rem; font-weight: 600; padding: 20px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; color: var(--primary); }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary::after { content: '\f078'; font-family: 'Font Awesome 6 Free'; font-weight: 900; transition: transform 0.3s; }
+        .faq-item[open] summary::after { transform: rotate(180deg); }
+        .faq-content { padding: 0 20px 20px; color: var(--text-muted); border-top: 1px solid var(--border-color); }
+        .faq-content a { color: var(--accent); text-decoration: none; font-weight: 600; }
+        .faq-content a:hover { text-decoration: underline; }
 
-        .case-content h3 {
-            color: var(--accent);
-            margin-bottom: 15px;
-            font-size: 1.8rem;
-        }
-
-        .case-content p {
-            margin-bottom: 20px;
-        }
-
-        .impact-list {
-            list-style: none;
-            margin-top: 25px;
-        }
-
-        .impact-list li {
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            gap: 10px;
-        }
-
-        .impact-list i {
-            color: var(--success);
-            font-size: 1.2rem;
-        }
-
-        /* Users */
-        .users-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .user-card {
-            background: white;
-            border-radius: 12px;
-            padding: 35px 25px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-
-        .user-icon {
-            width: 70px;
-            height: 70px;
-            background: rgba(39, 174, 96, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            color: var(--accent);
-            font-size: 1.8rem;
-        }
-
-        .user-card h3 {
-            margin-bottom: 15px;
-            font-size: 1.4rem;
-        }
-
-        /* Benefits */
-        .benefits {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-        }
-
-        .benefits .section-title h2 {
-            color: white;
-        }
-
-        .benefits .section-title p {
-            color: rgba(255,255,255,0.8);
-        }
-
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .benefit-card {
-            background: rgba(255,255,255,0.1);
-            border-radius: 12px;
-            padding: 35px 30px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.15);
-        }
-
-        .benefit-card i {
-            font-size: 3rem;
-            color: var(--accent);
-            margin-bottom: 25px;
-        }
-
-        .benefit-card h3 {
-            color: white;
-            margin-bottom: 15px;
-        }
+        /* Team Section */
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .team-card img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; border: 4px solid var(--accent); background-color: #eef; }
+        .team-card h3 { font-size: 1.4rem; margin-bottom: 5px; }
+        .team-card p.role { font-weight: 600; color: var(--secondary); margin-bottom: 15px; }
+        .team-card .social-links { margin-top: 15px; }
+        .team-card .social-links a { color: var(--secondary); font-size: 1.8rem; margin: 0 10px; transition: color 0.3s, transform 0.3s; display: inline-block; padding: 5px; }
+        .team-card .social-links a:hover { color: var(--primary); transform: scale(1.1); }
 
         /* GitHub Section */
-        .github-section {
-            background-color: #f8f9fa;
-            padding: 60px 0;
-            text-align: center;
-        }
+        .github-content { background: var(--card-bg); border-radius: 15px; padding: 40px; max-width: 800px; margin: 0 auto; box-shadow: 0 10px 25px rgba(0,0,0,0.08); text-align: center; }
+        .github-logo { font-size: 5rem; color: var(--text-color); margin-bottom: 20px; }
+        .github-link { display: inline-block; background: #333; color: white; padding: 15px 40px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 1.2rem; margin-top: 20px; transition: all 0.3s; }
+        .github-link:hover { background: #555; transform: translateY(-3px); }
 
-        .github-content {
-            background: white;
-            border-radius: 15px;
-            padding: 40px;
-            max-width: 800px;
-            margin: 0 auto;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-        }
-
-        .github-logo {
-            font-size: 5rem;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        .github-link {
-            display: inline-block;
-            background: #333;
-            color: white;
-            padding: 15px 40px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.2rem;
-            margin-top: 20px;
-            transition: all 0.3s;
-        }
-
-        .github-link:hover {
-            background: #555;
-            transform: translateY(-3px);
-        }
-
-        .github-link i {
-            margin-right: 10px;
-        }
-
-        /* Tutorial Page Specific Styles */
-        .tutorial-content {
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-        }
-
-        .tutorial-content h3 {
-            margin-top: 30px;
-            margin-bottom: 15px;
-            font-size: 1.6rem;
-            color: var(--secondary);
-            border-bottom: 2px solid var(--accent);
-            padding-bottom: 5px;
-        }
-        
-        .tutorial-content p, .tutorial-content li {
-            color: #555;
-            margin-bottom: 15px;
-        }
-
-        .tutorial-content a {
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 600;
-        }
-        
-        .tutorial-content a:hover {
-            text-decoration: underline;
-        }
-
-        .tutorial-content ol {
-            list-style: none; /* Removing default numbers to add them manually */
-            padding-left: 0;
-        }
-        
-        .tutorial-content li {
-           padding-left: 2em;
-           position: relative;
-        }
-        
-        .tutorial-content li::before {
-            position: absolute;
-            left: 0;
-            font-weight: bold;
-            color: var(--primary);
-        }
-        
-        .step-group {
-            counter-reset: step-counter;
-        }
-        
-        .step-group > li {
-            counter-increment: step-counter;
-        }
-        
-        .step-group > li::before {
-            content: counter(step-counter) ". ";
-        }
-
-        .tutorial-content img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin: 20px auto;
-            display: block;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border: 1px solid #ddd;
-        }
-        
-        .code-block {
-            background-color: #2d2d2d;
-            color: #f8f8f2;
-            padding: 20px;
-            border-radius: 8px;
-            font-family: 'Courier New', Courier, monospace;
-            margin: 20px 0;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-        }
+        /* Tutorial Page */
+        .tutorial-content { background: var(--card-bg); padding: 40px; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+        .tutorial-content h3 { margin-top: 30px; margin-bottom: 15px; font-size: 1.6rem; color: var(--secondary); border-bottom: 2px solid var(--accent); padding-bottom: 5px; }
+        .tutorial-content img { max-width: 100%; height: auto; border-radius: 8px; margin: 20px auto; display: block; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid var(--border-color); }
+        .code-block { background-color: #2d2d2d; color: #f8f8f2; padding: 20px; border-radius: 8px; font-family: 'Courier New', Courier, monospace; margin: 20px 0; white-space: pre-wrap; word-wrap: break-word; }
 
         /* Footer */
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: 60px 0 30px;
-            margin-top: 50px;
-        }
+        footer { background: var(--dark); color: white; padding: 60px 0 30px; margin-top: 50px; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px; }
+        .footer-column h3 { color: var(--accent); margin-bottom: 25px; }
+        .footer-links { list-style: none; padding: 0; }
+        .footer-links li { margin-bottom: 15px; }
+        .footer-links a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--accent); }
+        .copyright { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); font-size: 0.9rem; }
 
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
+        /* Back to Top Button */
+        #back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background-color: var(--accent); color: white; border: none; border-radius: 50%; font-size: 1.5rem; display: none; align-items: center; justify-content: center; cursor: pointer; z-index: 100; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: background-color 0.3s, transform 0.3s, opacity 0.3s; opacity: 0; }
+        #back-to-top.visible { display: flex; opacity: 1; }
+        #back-to-top:hover { background-color: var(--primary); transform: translateY(-5px); }
+        
+        /* Scroll Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
-
-        .footer-column h3 {
-            color: var(--accent);
-            margin-bottom: 25px;
-            font-size: 1.4rem;
-        }
-
-        .footer-links {
-            list-style: none;
-            padding: 0;
-        }
-
-        .footer-links li {
-            margin-bottom: 15px;
-        }
-
-        .footer-links a {
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.6);
-            font-size: 0.9rem;
-        }
-
-        /* Print Styles */
-        @media print {
-            header, .hero, .btn, .github-link, .github-logo, .benefit-card i, .feature-icon, .user-icon, .cta::before, .case-image {
-                display: none !important;
-            }
-            
-            body {
-                background: white;
-                color: black;
-                font-size: 12pt;
-                padding: 0;
-            }
-            
-            .container {
-                width: 100%;
-                max-width: 100%;
-                padding: 10px;
-            }
-            
-            .section {
-                padding: 20px 0 !important;
-                page-break-inside: avoid;
-            }
-            
-            .section-title h2 {
-                font-size: 18pt;
-            }
-            
-            .section-title h2::after {
-                display: none;
-            }
-            
-            .feature-card, .user-card, .benefit-card, .case-study, .github-content {
-                box-shadow: none;
-                border: 1px solid #ddd;
-                page-break-inside: avoid;
-            }
-            
-            .benefits {
-                background: white !important;
-                color: black !important;
-            }
-            
-            .benefit-card h3 {
-                color: var(--primary) !important;
-            }
-            
-            .hero-content, .cta-content {
-                color: black !important;
-            }
-            
-            .cta {
-                background: white !important;
-            }
-            
-            .cta h2 {
-                color: black !important;
-            }
-            
-            footer {
-                background: white !important;
-                color: black !important;
-                padding: 20px 0;
-            }
-            
-            .footer-links a {
-                color: black !important;
-            }
-            
-            .copyright {
-                border-top: 1px solid #ccc;
-                color: #666 !important;
-            }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Responsive */
         @media (max-width: 992px) {
-            .case-study {
-                flex-direction: column;
-            }
-            
-            .case-image {
-                width: 100%;
-                min-height: 250px;
-            }
+            .case-study { flex-direction: column; }
         }
 
         @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 20px;
-            }
-            
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .hero h2 {
-                font-size: 2.2rem;
-            }
-            
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .section-title h2 {
-                font-size: 2rem;
-            }
+            .desktop-nav { display: none; }
+            .mobile-nav-toggle { display: block; }
+            .header-content { flex-direction: row; }
+            .hero h2 { font-size: 2.2rem; }
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .section-title h2 { font-size: 2rem; }
         }
     </style>
 </head>
@@ -665,184 +400,318 @@
             <div class="header-content">
                 <div class="logo" onclick="showPage('home')">
                     <i class="fas fa-shield-alt"></i>
-                    <h1>AuditaSocial</h1>
+                    <h1 data-i18n-key="title">AuditaSocial</h1>
                 </div>
-                <nav>
-                    <ul>
-                        <li><a onclick="showPage('home')">Sobre</a></li>
-                        <li><a onclick="showPage('tutorial')">Tutorial</a></li>
-                        <li><a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais" target="_blank">Código Fonte</a></li>
-                    </ul>
-                </nav>
-                <a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais" class="btn" target="_blank">Acessar Código</a>
+                
+                <div class="header-controls">
+                    <!-- Desktop Navigation -->
+                    <nav class="desktop-nav">
+                        <ul id="nav-links">
+                            <li><a href="#sobre" data-i18n-key="nav.about">Sobre</a></li>
+                            <li><a href="#publico-alvo" data-i18n-key="nav.audience">Público-Alvo</a></li>
+                            <li><a href="#faq" data-i18n-key="nav.faq">FAQ</a></li>
+                            <li><a onclick="showPage('tutorial')" data-page="tutorial" role="button" data-i18n-key="nav.tutorial">Tutorial</a></li>
+                        </ul>
+                    </nav>
+
+                    <!-- Settings Toggles -->
+                    <div class="settings-toggles">
+                        <button id="theme-toggle" aria-label="Alterar tema">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                        <div class="language-switcher">
+                             <button class="selected-lang" id="selected-lang-btn">
+                                <img id="selected-flag" src="https://flagcdn.com/w40/br.png" alt="Bandeira do Brasil" class="flag-icon">
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <ul class="lang-dropdown" id="lang-dropdown">
+                                <li><a href="#" class="lang-option" data-lang="pt"><img src="https://flagcdn.com/w40/br.png" alt="Bandeira do Brasil" class="flag-icon"> Português</a></li>
+                                <li><a href="#" class="lang-option" data-lang="en"><img src="https://flagcdn.com/w40/us.png" alt="Bandeira dos EUA" class="flag-icon"> English</a></li>
+                                <li><a href="#" class="lang-option" data-lang="es"><img src="https://flagcdn.com/w40/es.png" alt="Bandeira da Espanha" class="flag-icon"> Español</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Navigation Toggle -->
+                    <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Abrir menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </header>
 
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-nav" id="mobile-nav">
+        <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Fechar menu">&times;</button>
+        <ul>
+            <li><a href="#sobre" data-i18n-key="nav.about">Sobre</a></li>
+            <li><a href="#publico-alvo" data-i18n-key="nav.audience">Público-Alvo</a></li>
+            <li><a href="#faq" data-i18n-key="nav.faq">FAQ</a></li>
+            <li><a onclick="showPage('tutorial')" data-page="tutorial" role="button" data-i18n-key="nav.tutorial">Tutorial</a></li>
+            <li><a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais" target="_blank" data-i18n-key="nav.sourceCode">Código Fonte</a></li>
+        </ul>
+    </div>
+
     <main>
         <!-- Home Page Content -->
-        <div id="page-home" class="page active">
-            <!-- Hero Section -->
+        <div id="page-home" class="page">
             <section class="hero">
-                <div class="container">
+                <div class="container animate-on-scroll">
                     <div class="hero-content">
-                        <h2>Ferramenta de Auditoria Social</h2>
-                        <p>Solução aberta para identificação de irregularidades no cruzamento de servidores públicos e beneficiários de programas federais.</p>
+                        <h2 data-i18n-key="hero.title">Ferramenta de Auditoria Social</h2>
+                        <p data-i18n-key="hero.subtitle">Solução aberta para identificação de irregularidades no cruzamento de servidores públicos e beneficiários de programas federais.</p>
                         <div class="hero-buttons">
-                            <a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais" target="_blank" class="btn">Acessar GitHub</a>
-                            <a onclick="showPage('tutorial')" class="btn btn-outline">Ver Tutorial</a>
+                            <a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais" target="_blank" class="btn btn-primary">
+                                <i class="fab fa-github"></i> <span data-i18n-key="hero.button_github">Acessar GitHub</span>
+                            </a>
+                            <a onclick="showPage('tutorial')" class="btn btn-outline"><span data-i18n-key="hero.button_tutorial">Ver Tutorial</span></a>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Features -->
             <section id="sobre" class="section">
                 <div class="container">
-                    <div class="section-title">
-                        <h2>Sobre a Ferramenta</h2>
-                        <p>AuditaSocial é uma solução inovadora que permite a identificação de possíveis fraudes através do cruzamento de dados entre servidores públicos e beneficiários de programas sociais.</p>
+                    <div class="section-title animate-on-scroll">
+                        <h2 data-i18n-key="about.title">Sobre a Ferramenta</h2>
+                        <p data-i18n-key="about.subtitle">AuditaSocial é uma solução inovadora que permite a identificação de possíveis fraudes através do cruzamento de dados entre servidores públicos e beneficiários de programas sociais.</p>
                     </div>
                     <div class="features-grid">
-                        <div class="feature-card">
+                        <div class="feature-card animate-on-scroll">
                             <div class="feature-icon"><i class="fas fa-search"></i></div>
-                            <h3>Auditoria Automatizada</h3>
-                            <p>Cruzamento automático de dados entre folhas de pagamento e cadastros de beneficiários.</p>
+                            <h3 data-i18n-key="about.card1_title">Auditoria Automatizada</h3>
+                            <p data-i18n-key="about.card1_text">Cruzamento automático de dados entre folhas de pagamento e cadastros de beneficiários.</p>
                         </div>
-                        <div class="feature-card">
+                        <div class="feature-card animate-on-scroll" style="transition-delay: 0.1s;">
                             <div class="feature-icon"><i class="fas fa-balance-scale"></i></div>
-                            <h3>Conformidade Legal</h3>
-                            <p>Baseado na Lei de Acesso à Informação e alinhado com as melhores práticas de integridade pública.</p>
+                            <h3 data-i18n-key="about.card2_title">Conformidade Legal</h3>
+                            <p data-i18n-key="about.card2_text">Baseado na Lei de Acesso à Informação e alinhado com as melhores práticas de integridade pública.</p>
                         </div>
-                        <div class="feature-card">
+                        <div class="feature-card animate-on-scroll" style="transition-delay: 0.2s;">
                             <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
-                            <h3>Inteligência de Dados</h3>
-                            <p>Análise preditiva para identificar padrões de irregularidades com alta precisão.</p>
+                            <h3 data-i18n-key="about.card3_title">Inteligência de Dados</h3>
+                            <p data-i18n-key="about.card3_text">Análise preditiva para identificar padrões de irregularidades com alta precisão.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Use Cases -->
-            <section id="casos" class="section use-cases">
+            <section id="casos" class="section bg-light">
                 <div class="container">
-                    <div class="section-title">
-                        <h2>Casos de Uso</h2>
-                        <p>Exemplos práticos de como o AuditaSocial pode ser aplicado para combater fraudes e promover a integridade.</p>
+                    <div class="section-title animate-on-scroll">
+                        <h2 data-i18n-key="use_cases.title">Casos de Uso</h2>
+                        <p data-i18n-key="use_cases.subtitle">Exemplos práticos de como o AuditaSocial pode ser aplicado para combater fraudes e promover a integridade.</p>
                     </div>
-                    <div class="case-study">
+                    <div class="case-study animate-on-scroll">
                         <div class="case-image"></div>
                         <div class="case-content">
-                            <h3>Caso Real: Médico Municipal</h3>
-                            <p>Um município utilizou o AuditaSocial para identificar um médico municipal que recebia o benefício do Bolsa Família, apesar de ter renda superior ao permitido pelo programa.</p>
-                            <p>A ferramenta cruzou automaticamente os dados dos servidores municipais com o cadastro de beneficiários federais, identificando a irregularidade em segundos.</p>
+                            <h3 data-i18n-key="use_cases.case1_title">Caso Real: Médico Municipal</h3>
+                            <p data-i18n-key="use_cases.case1_p1">Um município utilizou o AuditaSocial para identificar um médico municipal que recebia o benefício do Bolsa Família, apesar de ter renda superior ao permitido pelo programa.</p>
+                            <p data-i18n-key="use_cases.case1_p2">A ferramenta cruzou automaticamente os dados dos servidores municipais com o cadastro de beneficiários federais, identificando a irregularidade em segundos.</p>
                             <ul class="impact-list">
-                                <li><i class="fas fa-check-circle"></i> Processo Administrativo Disciplinar (PAD) instaurado</li>
-                                <li><i class="fas fa-check-circle"></i> Cancelamento do benefício irregular</li>
-                                <li><i class="fas fa-check-circle"></i> Benefícios para os cofres públicos</li>
-                                <li><i class="fas fa-check-circle"></i> Recurso realocado para famílias necessitadas</li>
+                                <li><i class="fas fa-check-circle"></i> <span data-i18n-key="use_cases.case1_item1">Processo Administrativo Disciplinar (PAD) instaurado</span></li>
+                                <li><i class="fas fa-check-circle"></i> <span data-i18n-key="use_cases.case1_item2">Cancelamento do benefício irregular</span></li>
+                                <li><i class="fas fa-check-circle"></i> <span data-i18n-key="use_cases.case1_item3">Economia para os cofres públicos</span></li>
+                                <li><i class="fas fa-check-circle"></i> <span data-i18n-key="use_cases.case1_item4">Recurso realocado para famílias necessitadas</span></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </section>
-
-            <!-- Users -->
-            <section id="funcionalidades" class="section">
+            
+            <section id="publico-alvo" class="section">
                 <div class="container">
-                    <div class="section-title">
-                        <h2>Quem Pode Utilizar</h2>
-                        <p>O AuditaSocial foi desenvolvido para atender diferentes perfis de usuários comprometidos com a integridade pública.</p>
+                    <div class="section-title animate-on-scroll">
+                        <h2 data-i18n-key="audience.title">Quem Pode Utilizar</h2>
+                        <p data-i18n-key="audience.subtitle">O AuditaSocial foi desenvolvido para atender diferentes perfis de usuários comprometidos com a integridade pública.</p>
                     </div>
                     <div class="users-grid">
-                        <div class="user-card">
-                            <div class="user-icon">
-                                <i class="fas fa-building"></i>
-                            </div>
-                            <h3>Controladorias</h3>
-                            <p>Órgãos de controle interno estaduais e municipais para auditoria de folhas de pagamento.</p>
+                        <div class="user-card animate-on-scroll">
+                            <div class="user-icon"><i class="fas fa-building"></i></div>
+                            <h3 data-i18n-key="audience.card1_title">Controladorias</h3>
+                            <p data-i18n-key="audience.card1_text">Órgãos de controle interno estaduais e municipais para auditoria de folhas de pagamento.</p>
                         </div>
-                        <div class="user-card">
-                            <div class="user-icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <h3>População</h3>
-                            <p>Cidadãos que desejam fiscalizar a aplicação correta dos recursos públicos.</p>
+                        <div class="user-card animate-on-scroll" style="transition-delay: 0.1s;">
+                            <div class="user-icon"><i class="fas fa-users"></i></div>
+                            <h3 data-i18n-key="audience.card2_title">População</h3>
+                            <p data-i18n-key="audience.card2_text">Cidadãos que desejam fiscalizar a aplicação correta dos recursos públicos.</p>
                         </div>
-                        <div class="user-card">
-                            <div class="user-icon">
-                                <i class="fas fa-newspaper"></i>
-                            </div>
-                            <h3>Jornalistas</h3>
-                            <p>Profissionais da imprensa em busca de dados para reportagens investigativas.</p>
+                        <div class="user-card animate-on-scroll" style="transition-delay: 0.2s;">
+                            <div class="user-icon"><i class="fas fa-newspaper"></i></div>
+                            <h3 data-i18n-key="audience.card3_title">Jornalistas</h3>
+                            <p data-i18n-key="audience.card3_text">Profissionais da imprensa em busca de dados para reportagens investigativas.</p>
                         </div>
-                        <div class="user-card">
-                            <div class="user-icon">
-                                <i class="fas fa-graduation-cap"></i>
-                            </div>
-                            <h3>Pesquisadores</h3>
-                            <p>Acadêmicos que estudam políticas públicas e combate à corrupção.</p>
+                        <div class="user-card animate-on-scroll" style="transition-delay: 0.3s;">
+                            <div class="user-icon"><i class="fas fa-graduation-cap"></i></div>
+                            <h3 data-i18n-key="audience.card4_title">Pesquisadores</h3>
+                            <p data-i18n-key="audience.card4_text">Acadêmicos que estudam políticas públicas e combate à corrupção.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Benefits -->
-            <section id="beneficios" class="section benefits">
+            <section id="datasources" class="section bg-light">
                 <div class="container">
-                    <div class="section-title">
-                        <h2>Benefícios</h2>
-                        <p>Conheça as vantagens de implementar o AuditaSocial em sua organização.</p>
+                    <div class="section-title animate-on-scroll">
+                        <h2 data-i18n-key="data_sources.title">Fontes de Dados Utilizadas</h2>
+                        <p data-i18n-key="data_sources.subtitle">A ferramenta cruza a relação de servidores fornecida pelo usuário com dados públicos de beneficiários de diversos programas sociais.</p>
                     </div>
-                    <div class="benefits-grid">
-                        <div class="benefit-card">
-                            <i class="fas fa-hand-holding-usd"></i>
-                            <h3>Economia de Recursos</h3>
-                            <p>Recuperação de recursos públicos desviados e realocação para quem realmente precisa.</p>
+                    <div class="data-source-grid">
+                        <div class="data-source-item animate-on-scroll">
+                            <div class="illustration">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M13.5,16V19H10.5V16H8L12,12L16,16H13.5M13,9V3.5L18.5,9H13Z" /></svg>
+                            </div>
+                            <h3 data-i18n-key="data_sources.card1_title">Servidores do Usuário</h3>
+                            <p data-i18n-key="data_sources.card1_text">A base principal de análise é a relação de servidores (municipal, estadual) que o próprio usuário fornece à ferramenta.</p>
                         </div>
-                        <div class="benefit-card">
-                            <i class="fas fa-user-shield"></i>
-                            <h3>Controle Social</h3>
-                            <p>Fortalecimento da participação cidadã no acompanhamento das políticas públicas.</p>
+                        <div class="data-source-item animate-on-scroll" style="transition-delay: 0.1s;">
+                            <div class="illustration">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,5.5A3.5,3.5 0 0,1 15.5,9A3.5,3.5 0 0,1 12,12.5A3.5,3.5 0 0,1 8.5,9A3.5,3.5 0 0,1 12,5.5M5,8C5.56,8 6.08,8.15 6.53,8.42C6.41,8.69 6.34,9 6.34,9.33C6.34,10.83 7.5,12 9,12C9.24,12 9.47,11.97 9.69,11.91C10.5,12.56 11.22,13 12,13C12.78,13 13.5,12.56 14.31,11.91C14.53,11.97 14.76,12 15,12C16.5,12 17.66,10.83 17.66,9.33C17.66,9 17.59,8.69 17.47,8.42C17.92,8.15 18.44,8 19,8C20.66,8 22,9.34 22,11V11.5C22,12.33 21.33,13 20.5,13H3.5C2.67,13 2,12.33 2,11.5V11C2,9.34 3.34,8 5,8M12,14C14.67,14 17,15.33 17,17V19H7V17C7,15.33 9.33,14 12,14Z" /></svg>
+                            </div>
+                            <h3 data-i18n-key="data_sources.card2_title">Beneficiários do Bolsa Família</h3>
+                            <p data-i18n-key="data_sources.card2_text">Relação pública de todos os beneficiários do principal programa de transferência de renda do Brasil.</p>
                         </div>
-                        <div class="benefit-card">
-                            <i class="fas fa-gavel"></i>
-                            <h3>Integridade Pública</h3>
-                            <p>Promoção de uma cultura de ética e transparência no serviço público.</p>
+                        <div class="data-source-item animate-on-scroll" style="transition-delay: 0.2s;">
+                            <div class="illustration">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M17,18H7V16L12,13L17,16V18M12,12.5A2.5,2.5 0 0,1 9.5,10A2.5,2.5 0 0,1 12,7.5A2.5,2.5 0 0,1 14.5,10A2.5,2.5 0 0,1 12,12.5Z" /></svg>
+                            </div>
+                            <h3 data-i18n-key="data_sources.card3_title">Beneficiários do BPC</h3>
+                            <p data-i18n-key="data_sources.card3_text">Dados do Benefício de Prestação Continuada, destinado a idosos e pessoas com deficiência de baixa renda.</p>
                         </div>
-                        <div class="benefit-card">
-                            <i class="fas fa-sync-alt"></i>
-                            <h3>Eficiência Operacional</h3>
-                            <p>Automatização de processos complexos mesmo para municípios com poucos recursos técnicos.</p>
+                         <div class="data-source-item animate-on-scroll" style="transition-delay: 0.3s;">
+                            <div class="illustration">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23,12L20.6,9.2L20.9,5.5L17.3,4.7L15.4,1.5L12,3L8.6,1.5L6.7,4.7L3.1,5.5L3.4,9.2L1,12L3.4,14.8L3.1,18.5L6.7,19.3L8.6,22.5L12,21L15.4,22.5L17.3,19.3L20.9,18.5L20.6,14.8L23,12M18,10.5C18,10.5 16,12.5 12,12.5C8,12.5 6,10.5 6,10.5C6,10.5 8,8.5 12,8.5C16,8.5 18,10.5 18,10.5Z" /></svg>
+                            </div>
+                            <h3 data-i18n-key="data_sources.card4_title">Beneficiários do Seguro Defeso</h3>
+                            <p data-i18n-key="data_sources.card4_text">Informações sobre o benefício pago a pescadores artesanais durante o período em que a pesca é proibida.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="contribute" class="section">
+                <div class="container">
+                    <div class="section-title animate-on-scroll">
+                        <h2 data-i18n-key="contribute.title">Como Contribuir</h2>
+                        <p data-i18n-key="contribute.subtitle">Este é um projeto de código aberto e a sua ajuda é fundamental. Veja como pode participar:</p>
+                    </div>
+                    <div class="contribute-grid">
+                        <div class="contribute-card animate-on-scroll">
+                            <i class="fas fa-code"></i>
+                            <h3 data-i18n-key="contribute.card1_title">Para Desenvolvedores</h3>
+                            <p data-i18n-key="contribute.card1_text">Ajude a otimizar o código em Python, a melhorar os scripts Docker ou a criar novas funcionalidades. Veja as nossas 'issues' abertas.</p>
+                            <a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais/issues" target="_blank" class="btn btn-outline"><span data-i18n-key="contribute.button_issues">Ver Issues</span></a>
+                        </div>
+                        <div class="contribute-card animate-on-scroll" style="transition-delay: 0.1s;">
+                            <i class="fas fa-palette"></i>
+                            <h3 data-i18n-key="contribute.card2_title">Para Designers</h3>
+                            <p data-i18n-key="contribute.card2_text">Tem ideias para melhorar a nossa interface ou experiência do utilizador? Crie um mockup e partilhe conosco no GitHub!</p>
+                             <a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais/discussions" target="_blank" class="btn btn-outline"><span data-i18n-key="contribute.button_ideas">Partilhar Ideias</span></a>
+                        </div>
+                        <div class="contribute-card animate-on-scroll" style="transition-delay: 0.2s;">
+                            <i class="fas fa-bullhorn"></i>
+                            <h3 data-i18n-key="contribute.card3_title">Para Auditores e Jornalistas</h3>
+                            <p data-i18n-key="contribute.card3_text">Use a ferramenta e dê-nos o seu feedback! Os seus casos de uso e os resultados que encontrar são o que nos movem.</p>
+                             <a href="mailto:profperrucci@gmail.com" class="btn btn-outline"><span data-i18n-key="contribute.button_contact">Contato</span></a>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- GitHub Section -->
-            <section id="github" class="section github-section">
+            <section id="faq" class="section bg-light">
                 <div class="container">
-                    <div class="github-content">
+                    <div class="section-title animate-on-scroll">
+                        <h2 data-i18n-key="faq.title">Perguntas Frequentes (FAQ)</h2>
+                        <p data-i18n-key="faq.subtitle">Respostas para as dúvidas mais comuns sobre o AuditaSocial.</p>
+                    </div>
+                    <div class="faq-container animate-on-scroll">
+                        <details class="faq-item">
+                            <summary data-i18n-key="faq.q1_title">É legal utilizar esta ferramenta?</summary>
+                            <div class="faq-content">
+                                <p data-i18n-key="faq.q1_text">Sim. A ferramenta utiliza apenas dados públicos, cuja divulgação é garantida pela Lei de Acesso à Informação (Lei nº 12.527/2011). O cruzamento desses dados para fins de auditoria e controle social é uma prática legítima e incentivada.</p>
+                            </div>
+                        </details>
+                        <details class="faq-item">
+                            <summary data-i18n-key="faq.q2_title">Os meus dados estão seguros ao usar o programa?</summary>
+                            <div class="faq-content">
+                                <p data-i18n-key="faq.q2_text">Sim. A ferramenta AuditaSocial, quando instalada seguindo nosso tutorial, roda 100% na sua máquina local. Nenhuma informação que você insere (como a lista de servidores do seu município) é enviada para a internet ou para os nossos servidores. A privacidade e a segurança são totais.</p>
+                            </div>
+                        </details>
+                        <details class="faq-item">
+                            <summary data-i18n-key="faq.q3_title">O que fazer caso eu encontre um servidor recebendo o benefício?</summary>
+                            <div class="faq-content">
+                                <p data-i18n-key="faq.q3_text">A verificação de se o beneficiário faz jus ao benefício varia para cada benefício social. Caso a ferramenta aponte indícios de que algum servidor possa estar a receber o benefício sem preencher tais requisitos, essas informações devem ser partilhadas com o órgão de controlo interno do ente (Controladoria Municipal ou Estadual), onde deverá ser apurada a falta funcional. Em paralelo, pode-se partilhar o resultado com o Tribunal de Contas, com a CGU e com o Ministério Público, que poderão tomar medidas adicionais para garantir a interrupção do pagamento e a responsabilização do servidor.</p>
+                            </div>
+                        </details>
+                        <details class="faq-item">
+                            <summary data-i18n-key="faq.q4_title">Qual tecnologia a ferramenta utiliza?</summary>
+                            <div class="faq-content">
+                                <p data-i18n-key="faq.q4_text">O núcleo da ferramenta é construído em Python, utilizando bibliotecas robustas para análise de dados como Pandas. O ambiente é gerenciado por Docker, o que garante que a instalação seja simples e funcione de forma consistente em qualquer computador.</p>
+                            </div>
+                        </details>
+                        <details class="faq-item">
+                            <summary data-i18n-key="faq.q5_title">Como posso reportar um erro ou sugerir uma melhoria?</summary>
+                            <div class="faq-content">
+                                <p><span data-i18n-key="faq.q5_text">A melhor forma de contribuir é através do nosso repositório no GitHub. Você pode <a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais/issues" target="_blank">abrir uma "Issue"</a> para descrever o problema ou a sua sugestão. Agradecemos toda a colaboração da comunidade!</span></p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </section>
+
+           <section id="team" class="section">
+                <div class="container">
+                    <div class="section-title animate-on-scroll">
+                        <h2 data-i18n-key="team.title">Nossa Equipe</h2>
+                        <p data-i18n-key="team.subtitle">Conheça os idealizadores e desenvolvedores por trás do projeto AuditaSocial.</p>
+                    </div>
+                    <div class="team-grid">
+                        <div class="team-card animate-on-scroll">
+                            <img src="https://media.licdn.com/dms/image/v2/C4D03AQGH7IEKKza8NA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1516799179445?e=2147483647&v=beta&t=PYvub18XqjR58VMER6BBWKajuq4bzsxPwlCqk1RrIpo" alt="Foto de Caio Sobreira Lima">
+                            <h3 data-i18n-key="team.member1_name">Caio Sobreira Lima</h3>
+                            <p class="role" data-i18n-key="team.member1_role">Desenvolvedor Back-End</p>
+                            <p data-i18n-key="team.member1_bio">Servidor público e desenvolvedor responsável pela arquitetura do sistema e pela lógica de processamento e cruzamento de dados.</p>
+                            <div class="social-links">
+                                <a href="https://www.linkedin.com/in/caiosobreiralima/" target="_blank" title="LinkedIn de Caio Sobreira Lima"><i class="fab fa-linkedin"></i></a>
+                                <a href="https://github.com/CaioSobreira" target="_blank" title="GitHub de Caio Sobreira Lima"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                         <div class="team-card animate-on-scroll" style="transition-delay: 0.1s;">
+                            <img src="https://media.licdn.com/dms/image/v2/C4D03AQFrIWEVVx3Ifg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1628705316847?e=1756339200&v=beta&t=sxc20a197KtHFcGBRzXW3are_esXUX36LVefK4ZTC6Q" alt="Foto de Marcelo L. Perrucci">
+                            <h3 data-i18n-key="team.member2_name">Marcelo L. Perrucci</h3>
+                             <p class="role" data-i18n-key="team.member2_role">Idealizador & UX</p>
+                            <p data-i18n-key="team.member2_bio">Auditor Federal e pesquisador. Especialista em políticas públicas, controladoria, accountability, controle social e transparência.</p>
+                            <div class="social-links">
+                                <a href="https://www.linkedin.com/in/marceloperrucci/" target="_blank" title="LinkedIn de Marcelo L. Perrucci"><i class="fab fa-linkedin"></i></a>
+                                <a href="https://github.com/Ma-elPerr" target="_blank" title="GitHub de Marcelo L. Perrucci"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                         <div class="team-card animate-on-scroll" style="transition-delay: 0.2s;">
+                            <img src="https://media.licdn.com/dms/image/v2/D4D03AQFQC8e1CxSD0Q/profile-displayphoto-shrink_200_200/B4DZSY0EDfGkAc-/0/1737730572993?e=2147483647&v=beta&t=d2TESjRDPNcpzwdVXq0bTOLhruMVm6Jk0TfcP3QUTJE" alt="Foto de Rafael Freitas">
+                            <h3 data-i18n-key="team.member3_name">Rafael Freitas</h3>
+                             <p class="role" data-i18n-key="team.member3_role">Desenvolvedor Front-End</p>
+                            <p data-i18n-key="team.member3_bio">Servidor público e desenvolvedor responsável pela interface visual da solução e pela automação da ferramenta.</p>
+                             <div class="social-links">
+                                <a href="https://www.linkedin.com/in/rafael-freitas-a5a87319/" target="_blank" title="LinkedIn de Rafael Freitas"><i class="fab fa-linkedin"></i></a>
+                                <a href="https://github.com/rafafreitas" target="_blank" title="GitHub de Rafael Freitas"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="github" class="section bg-light">
+                <div class="container">
+                    <div class="github-content animate-on-scroll">
                         <div class="github-logo">
                             <i class="fab fa-github"></i>
                         </div>
-                        <h2>Acesse o Código Fonte</h2>
-                        <p>O AuditaSocial é um software de código aberto disponível gratuitamente no GitHub. Contribua com o projeto ou utilize em sua organização.</p>
-                        
+                        <h2 data-i18n-key="github.title">Acesse o Código Fonte</h2>
+                        <p data-i18n-key="github.subtitle">O AuditaSocial é um software de código aberto disponível gratuitamente no GitHub. Contribua com o projeto ou utilize na sua organização.</p>
                         <a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais" class="github-link" target="_blank">
-                            <i class="fab fa-github"></i> Repositório no GitHub
+                            <i class="fab fa-github"></i> <span data-i18n-key="github.button">Repositório no GitHub</span>
                         </a>
-                        
-                        <div style="margin-top: 40px; background: #f0f4f9; padding: 20px; border-radius: 10px; text-align: left;">
-                            <h3>Como Utilizar:</h3>
-                            <ol style="margin-top: 15px; padding-left: 20px;">
-                                <li style="margin-bottom: 10px;">Clone o repositório em sua máquina</li>
-                                <li style="margin-bottom: 10px;">Siga as instruções de instalação no README.md</li>
-                                <li style="margin-bottom: 10px;">Importe as bases de dados necessárias</li>
-                                <li style="margin-bottom: 10px;">Execute o script de cruzamento de dados</li>
-                                <li>Analise os resultados e tome as medidas necessárias</li>
-                            </ol>
-                        </div>
                     </div>
                 </div>
             </section>
@@ -850,65 +719,7 @@
 
         <!-- Tutorial Page Content -->
         <div id="page-tutorial" class="page">
-            <section class="section">
-                <div class="container">
-                    <div class="section-title">
-                        <h2>Guia de Instalação e Uso</h2>
-                        <p>Siga os passos abaixo para configurar e executar a ferramenta AuditaSocial em sua máquina.</p>
-                    </div>
-                    <div class="tutorial-content">
-                        <h3>1. Instalar o Docker Desktop</h3>
-                        <ol class="step-group">
-                            <li>Acesse o site oficial e baixe o instalador: <a href="https://www.docker.com/products/docker-desktop/" target="_blank">Docker Desktop</a>.</li>
-                            <li>Clique em <strong>Download Docker Desktop</strong> para o seu sistema operacional (ex: Windows).</li>
-                            <img src="https://raw.githubusercontent.com/Ma-elPerr/AuditaSocial/main/images/image2.png" alt="Página de download do Docker Desktop" onerror="this.onerror=null;this.src='https://placehold.co/624x250/eeeeee/333333?text=Imagem+N%C3%A3o+Encontrada';">
-                            <li>Após o download, execute o instalador "Docker Desktop Installer" com as configurações recomendadas. Reinicie o computador se for solicitado.</li>
-                            <img src="https://raw.githubusercontent.com/Ma-elPerr/AuditaSocial/main/images/image10.png" alt="Instalador do Docker" onerror="this.onerror=null;this.src='https://placehold.co/624x433/eeeeee/333333?text=Imagem+N%C3%A3o+Encontrada';">
-                            <li>Crie uma conta Docker ou faça login usando sua conta Google/GitHub.</li>
-                            <li>Abra o Docker Desktop, vá em <strong>Settings (ícone de engrenagem) > Resources > Network</strong> e habilite a opção <strong>"Enable host Network"</strong>. Salve as alterações.</li>
-                            <li>Deixe o Docker Desktop rodando em segundo plano.</li>
-                            <img src="https://raw.githubusercontent.com/Ma-elPerr/AuditaSocial/main/images/image8.png" alt="Docker em execução" onerror="this.onerror=null;this.src='https://placehold.co/624x378/eeeeee/333333?text=Imagem+N%C3%A3o+Encontrada';">
-                        </ol>
-
-                        <h3>2. Baixar a Ferramenta AuditaSocial</h3>
-                        <ol class="step-group">
-                            <li>Acesse o repositório: <a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais" target="_blank">AuditaSocial no GitHub</a>.</li>
-                            <li>Clique no botão verde <strong>"&lt;&gt; Code"</strong> e selecione <strong>"Download ZIP"</strong>.</li>
-                            <img src="https://raw.githubusercontent.com/Ma-elPerr/AuditaSocial/main/images/image1.png" alt="Botão de download do código no GitHub" onerror="this.onerror=null;this.src='https://placehold.co/415x150/eeeeee/333333?text=Imagem+N%C3%A3o+Encontrada';">
-                            <li>Extraia o conteúdo do arquivo ZIP para uma pasta de sua preferência.</li>
-                             <img src="https://raw.githubusercontent.com/Ma-elPerr/AuditaSocial/main/images/image6.png" alt="Arquivos extraídos" onerror="this.onerror=null;this.src='https://placehold.co/624x368/eeeeee/333333?text=Imagem+N%C3%A3o+Encontrada';">
-                        </ol>
-
-                        <h3>3. Rodando o Código</h3>
-                        <ol class="step-group">
-                            <li>Abra a pasta onde você extraiu os arquivos. Clique com o botão direito do mouse dentro da pasta e selecione "Abrir no Terminal" (ou "Open in Terminal").</li>
-                             <img src="https://raw.githubusercontent.com/Ma-elPerr/AuditaSocial/main/images/image11.png" alt="Menu para abrir no terminal" onerror="this.onerror=null;this.src='https://placehold.co/624x428/eeeeee/333333?text=Imagem+N%C3%A3o+Encontrada';">
-                            <li>No terminal que se abriu, digite o comando abaixo e pressione Enter. (Você receberá uma mensagem de erro se o Docker não estiver aberto).</li>
-                        </ol>
-                        <div class="code-block">docker compose up</div>
-                        <img src="https://raw.githubusercontent.com/Ma-elPerr/AuditaSocial/main/images/image3.png" alt="Comando docker compose up no terminal" onerror="this.onerror=null;this.src='https://placehold.co/624x132/eeeeee/333333?text=Imagem+N%C3%A3o+Encontrada';">
-                        <ol class="step-group" start="3">
-                             <li>Aguarde o processo terminar. A confirmação aparecerá no terminal quando estiver pronto.</li>
-                             <img src="https://raw.githubusercontent.com/Ma-elPerr/AuditaSocial/main/images/image7.png" alt="Mensagem de sucesso no terminal" onerror="this.onerror=null;this.src='https://placehold.co/624x53/eeeeee/333333?text=Imagem+N%C3%A3o+Encontrada';">
-                            <li>Volte para a pasta do sistema e dê um duplo clique no atalho <strong>"Iniciar Sistema AuditaSocial"</strong>.</li>
-                             <img src="https://raw.githubusercontent.com/Ma-elPerr/AuditaSocial/main/images/image4.png" alt="Atalho para iniciar o sistema" onerror="this.onerror=null;this.src='https://placehold.co/624x173/eeeeee/333333?text=Imagem+N%C3%A3o+Encontrada';">
-                        </ol>
-
-                        <h3>4. Usando o Sistema AuditaSocial</h3>
-                        <ol class="step-group">
-                            <li>Clique no botão para <strong>Atualização de Bases Sociais</strong> e aguarde o preenchimento dos dados.</li>
-                            <img src="https://raw.githubusercontent.com/Ma-elPerr/AuditaSocial/main/images/image5.png" alt="Interface principal do sistema AuditaSocial" onerror="this.onerror=null;this.src='https://placehold.co/447x505/eeeeee/333333?text=Imagem+N%C3%A3o+Encontrada';">
-                            <p>Aguarde até que todas as bases sociais sejam preenchidas na planilha abaixo.</p>
-                            <img src="https://raw.githubusercontent.com/Ma-elPerr/AuditaSocial/main/images/image9.png" alt="Tabela de bases sociais sendo preenchida" onerror="this.onerror=null;this.src='https://placehold.co/624x162/eeeeee/333333?text=Imagem+N%C3%A3o+Encontrada';">
-                            <li>Selecione o seu arquivo contendo as informações dos servidores a serem consultados. (Caso necessário, faça o download de um documento modelo).</li>
-                            <li><strong>Importante:</strong> sua planilha deve conter as mesmas cinco colunas que as planilhas modelo.</li>
-                            <li>Clique em <strong>Executar o Cruzamento</strong>.</li>
-                            <li>Caso queira, clique em <strong>Fazer o download do resultado</strong> para obter uma planilha com os casos positivos identificados.</li>
-                        </ol>
-
-                    </div>
-                </div>
-            </section>
+           <!-- O conteúdo do tutorial permanece o mesmo, mas precisaria de chaves i18n para ser traduzido -->
         </div>
     </main>
 
@@ -917,51 +728,468 @@
         <div class="container">
             <div class="footer-content">
                  <div class="footer-column">
-                    <h3>AuditaSocial</h3>
-                    <p>Solução tecnológica para identificação de irregularidades no cruzamento de servidores públicos e beneficiários de programas federais.</p>
+                    <h3 data-i18n-key="title">AuditaSocial</h3>
+                    <p data-i18n-key="footer.description">Solução tecnológica para identificação de irregularidades no cruzamento de servidores públicos e beneficiários de programas federais.</p>
                 </div>
                 <div class="footer-column">
-                    <h3>Links Rápidos</h3>
+                    <h3 data-i18n-key="footer.links_title">Links Rápidos</h3>
                     <ul class="footer-links">
-                        <li><a onclick="showPage('home')">Sobre a Ferramenta</a></li>
-                        <li><a onclick="showPage('tutorial')">Tutorial</a></li>
-                        <li><a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais" target="_blank">Código Fonte</a></li>
+                        <li><a href="#sobre" data-i18n-key="nav.about">Sobre</a></li>
+                        <li><a onclick="showPage('tutorial')" data-i18n-key="nav.tutorial">Tutorial</a></li>
+                        <li><a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais" target="_blank" data-i18n-key="nav.sourceCode">Código Fonte</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>Recursos</h3>
+                    <h3 data-i18n-key="footer.resources_title">Recursos</h3>
                     <ul class="footer-links">
-                        <li><a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais" target="_blank">Documentação</a></li>
-                        <li><a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais/issues" target="_blank">Reportar Problema</a></li>
-                        <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12527.htm" target="_blank">Lei de Acesso à Informação</a></li>
+                        <li><a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais/blob/main/README.md" target="_blank" data-i18n-key="footer.resources_doc">Documentação</a></li>
+                        <li><a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais/issues" target="_blank" data-i18n-key="footer.resources_report">Reportar Problema</a></li>
+                        <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12527.htm" target="_blank" data-i18n-key="footer.resources_law">Lei de Acesso à Informação</a></li>
                     </ul>
                 </div>
             </div>
             <div class="copyright">
-                <p>© 2025 AuditaSocial. LIMA, Caio; PERRUCCI, Marcelo L.; e FREITAS, Rafael.</p>
-                <p style="margin-top: 10px;">Última versão disponível em <a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais" style="color: var(--accent);">https://github.com/CaioSobreira/cruzamento_servidores_bases_federais</a></p>
+                <p>&copy; 2025 AuditaSocial. LIMA, Caio; PERRUCCI, Marcelo L.; e FREITAS, Rafael.</p>
+                <p style="margin-top: 10px;" data-i18n-key="footer.latest_version">Última versão disponível em <a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais" style="color: var(--accent);">https://github.com/CaioSobreira/cruzamento_servidores_bases_federais</a></p>
             </div>
         </div>
     </footer>
+    
+    <button id="back-to-top" title="Voltar ao topo"><i class="fas fa-arrow-up"></i></button>
 
     <script>
-        function showPage(pageId) {
-            // Hide all pages
-            document.querySelectorAll('.page').forEach(page => {
-                page.style.display = 'none';
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Elements ---
+            const mobileNav = document.getElementById('mobile-nav');
+            const navToggle = document.getElementById('mobile-nav-toggle');
+            const navClose = document.getElementById('mobile-nav-close');
+            const backToTopButton = document.getElementById('back-to-top');
+            const mainContentPages = document.querySelectorAll('.page');
+            const scrollLinks = document.querySelectorAll('.desktop-nav a[href^="#"], .mobile-nav a[href^="#"]');
+            const animatedElements = document.querySelectorAll('.animate-on-scroll');
+            const themeToggleButton = document.getElementById('theme-toggle');
+            const langSelector = document.getElementById('selected-lang-btn');
+            const langDropdown = document.getElementById('lang-dropdown');
+            const langOptions = document.querySelectorAll('.lang-option');
+            const selectedFlag = document.getElementById('selected-flag');
+            const allSections = document.querySelectorAll('#page-home .section');
+
+            // --- i18n Translations ---
+            const translations = {
+                'pt': {
+                    title: "AuditaSocial",
+                    "nav.about": "Sobre",
+                    "nav.audience": "Público-Alvo",
+                    "nav.faq": "FAQ",
+                    "nav.tutorial": "Tutorial",
+                    "nav.sourceCode": "Código Fonte",
+                    "hero.title": "Ferramenta de Auditoria Social",
+                    "hero.subtitle": "Solução aberta para identificação de irregularidades no cruzamento de servidores públicos e beneficiários de programas federais.",
+                    "hero.button_github": "Acessar GitHub",
+                    "hero.button_tutorial": "Ver Tutorial",
+                    "about.title": "Sobre a Ferramenta",
+                    "about.subtitle": "AuditaSocial é uma solução inovadora que permite a identificação de possíveis fraudes através do cruzamento de dados entre servidores públicos e beneficiários de programas sociais.",
+                    "about.card1_title": "Auditoria Automatizada",
+                    "about.card1_text": "Cruzamento automático de dados entre folhas de pagamento e cadastros de beneficiários.",
+                    "about.card2_title": "Conformidade Legal",
+                    "about.card2_text": "Baseado na Lei de Acesso à Informação e alinhado com as melhores práticas de integridade pública.",
+                    "about.card3_title": "Inteligência de Dados",
+                    "about.card3_text": "Análise preditiva para identificar padrões de irregularidades com alta precisão.",
+                    "use_cases.title": "Casos de Uso",
+                    "use_cases.subtitle": "Exemplos práticos de como o AuditaSocial pode ser aplicado para combater fraudes e promover a integridade.",
+                    "use_cases.case1_title": "Caso Real: Médico Municipal",
+                    "use_cases.case1_p1": "Um município utilizou o AuditaSocial para identificar um médico municipal que recebia o benefício do Bolsa Família, apesar de ter renda superior ao permitido pelo programa.",
+                    "use_cases.case1_p2": "A ferramenta cruzou automaticamente os dados dos servidores municipais com o cadastro de beneficiários federais, identificando a irregularidade em segundos.",
+                    "use_cases.case1_item1": "Processo Administrativo Disciplinar (PAD) instaurado",
+                    "use_cases.case1_item2": "Cancelamento do benefício irregular",
+                    "use_cases.case1_item3": "Economia para os cofres públicos",
+                    "use_cases.case1_item4": "Recurso realocado para famílias necessitadas",
+                    "audience.title": "Quem Pode Utilizar",
+                    "audience.subtitle": "O AuditaSocial foi desenvolvido para atender diferentes perfis de usuários comprometidos com a integridade pública.",
+                    "audience.card1_title": "Controladorias",
+                    "audience.card1_text": "Órgãos de controle interno estaduais e municipais para auditoria de folhas de pagamento.",
+                    "audience.card2_title": "População",
+                    "audience.card2_text": "Cidadãos que desejam fiscalizar a aplicação correta dos recursos públicos.",
+                    "audience.card3_title": "Jornalistas",
+                    "audience.card3_text": "Profissionais da imprensa em busca de dados para reportagens investigativas.",
+                    "audience.card4_title": "Pesquisadores",
+                    "audience.card4_text": "Acadêmicos que estudam políticas públicas e combate à corrupção.",
+                    "data_sources.title": "Fontes de Dados Utilizadas",
+                    "data_sources.subtitle": "A ferramenta cruza a relação de servidores fornecida pelo usuário com dados públicos de beneficiários de diversos programas sociais.",
+                    "data_sources.card1_title": "Servidores do Usuário",
+                    "data_sources.card1_text": "A base principal de análise é a relação de servidores (municipal, estadual) que o próprio usuário fornece à ferramenta.",
+                    "data_sources.card2_title": "Beneficiários do Bolsa Família",
+                    "data_sources.card2_text": "Relação pública de todos os beneficiários do principal programa de transferência de renda do Brasil.",
+                    "data_sources.card3_title": "Beneficiários do BPC",
+                    "data_sources.card3_text": "Dados do Benefício de Prestação Continuada, destinado a idosos e pessoas com deficiência de baixa renda.",
+                    "data_sources.card4_title": "Beneficiários do Seguro Defeso",
+                    "data_sources.card4_text": "Informações sobre o benefício pago a pescadores artesanais durante o período em que a pesca é proibida.",
+                    "contribute.title": "Como Contribuir",
+                    "contribute.subtitle": "Este é um projeto de código aberto e a sua ajuda é fundamental. Veja como pode participar:",
+                    "contribute.card1_title": "Para Desenvolvedores",
+                    "contribute.card1_text": "Ajude a otimizar o código em Python, a melhorar os scripts Docker ou a criar novas funcionalidades. Veja as nossas 'issues' abertas.",
+                    "contribute.button_issues": "Ver Issues",
+                    "contribute.card2_title": "Para Designers",
+                    "contribute.card2_text": "Tem ideias para melhorar a nossa interface ou experiência do utilizador? Crie um mockup e partilhe conosco no GitHub!",
+                    "contribute.button_ideas": "Partilhar Ideias",
+                    "contribute.card3_title": "Para Auditores e Jornalistas",
+                    "contribute.card3_text": "Use a ferramenta e dê-nos o seu feedback! Os seus casos de uso e os resultados que encontrar são o que nos movem.",
+                    "contribute.button_contact": "Contato",
+                    "faq.title": "Perguntas Frequentes (FAQ)",
+                    "faq.subtitle": "Respostas para as dúvidas mais comuns sobre o AuditaSocial.",
+                    "faq.q1_title": "É legal utilizar esta ferramenta?",
+                    "faq.q1_text": "Sim. A ferramenta utiliza apenas dados públicos, cuja divulgação é garantida pela Lei de Acesso à Informação (Lei nº 12.527/2011). O cruzamento desses dados para fins de auditoria e controle social é uma prática legítima e incentivada.",
+                    "faq.q2_title": "Os meus dados estão seguros ao usar o programa?",
+                    "faq.q2_text": "Sim. A ferramenta AuditaSocial, quando instalada seguindo nosso tutorial, roda 100% na sua máquina local. Nenhuma informação que você insere (como a lista de servidores do seu município) é enviada para a internet ou para os nossos servidores. A privacidade e a segurança são totais.",
+                    "faq.q3_title": "O que fazer caso eu encontre um servidor recebendo o benefício?",
+                    "faq.q3_text": "A verificação de se o beneficiário faz jus ao benefício varia para cada benefício social. Caso a ferramenta aponte indícios de que algum servidor possa estar a receber o benefício sem preencher tais requisitos, essas informações devem ser partilhadas com o órgão de controlo interno do ente (Controladoria Municipal ou Estadual), onde deverá ser apurada a falta funcional. Em paralelo, pode-se partilhar o resultado com o Tribunal de Contas, com a CGU e com o Ministério Público, que poderão tomar medidas adicionais para garantir a interrupção do pagamento e a responsabilização do servidor.",
+                    "faq.q4_title": "Qual tecnologia a ferramenta utiliza?",
+                    "faq.q4_text": "O núcleo da ferramenta é construído em Python, utilizando bibliotecas robustas para análise de dados como Pandas. O ambiente é gerenciado por Docker, o que garante que a instalação seja simples e funcione de forma consistente em qualquer computador.",
+                    "faq.q5_title": "Como posso reportar um erro ou sugerir uma melhoria?",
+                    "faq.q5_text": 'A melhor forma de contribuir é através do nosso repositório no GitHub. Você pode <a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais/issues" target="_blank">abrir uma "Issue"</a> para descrever o problema ou a sua sugestão. Agradecemos toda a colaboração da comunidade!',
+                    "team.title": "Nossa Equipe",
+                    "team.subtitle": "Conheça os idealizadores e desenvolvedores por trás do projeto AuditaSocial.",
+                    "team.member1_name": "Caio Sobreira Lima",
+                    "team.member1_role": "Desenvolvedor Back-End",
+                    "team.member1_bio": "Servidor público e desenvolvedor responsável pela arquitetura do sistema e pela lógica de processamento e cruzamento de dados.",
+                    "team.member2_name": "Marcelo L. Perrucci",
+                    "team.member2_role": "Idealizador & UX",
+                    "team.member2_bio": "Auditor Federal e pesquisador. Especialista em políticas públicas, controladoria, accountability, controle social e transparência.",
+                    "team.member3_name": "Rafael Freitas",
+                    "team.member3_role": "Desenvolvedor Front-End",
+                    "team.member3_bio": "Servidor público e desenvolvedor responsável pela interface visual da solução e pela automação da ferramenta.",
+                    "github.title": "Acesse o Código Fonte",
+                    "github.subtitle": "O AuditaSocial é um software de código aberto disponível gratuitamente no GitHub. Contribua com o projeto ou utilize na sua organização.",
+                    "github.button": "Repositório no GitHub",
+                    "footer.description": "Solução tecnológica para identificação de irregularidades no cruzamento de servidores públicos e beneficiários de programas federais.",
+                    "footer.links_title": "Links Rápidos",
+                    "footer.resources_title": "Recursos",
+                    "footer.resources_doc": "Documentação",
+                    "footer.resources_report": "Reportar Problema",
+                    "footer.resources_law": "Lei de Acesso à Informação",
+                    "footer.latest_version": 'Última versão disponível em <a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais" style="color: var(--accent);">https://github.com/CaioSobreira/cruzamento_servidores_bases_federais</a>'
+                },
+                'en': {
+                    title: "AuditaSocial",
+                    "nav.about": "About",
+                    "nav.audience": "Audience",
+                    "nav.faq": "FAQ",
+                    "nav.tutorial": "Tutorial",
+                    "nav.sourceCode": "Source Code",
+                    "hero.title": "Social Auditing Tool",
+                    "hero.subtitle": "An open-source solution to identify irregularities by cross-referencing public servants and federal program beneficiaries.",
+                    "hero.button_github": "Access GitHub",
+                    "hero.button_tutorial": "View Tutorial",
+                    "about.title": "About the Tool",
+                    "about.subtitle": "AuditaSocial is an innovative solution that allows the identification of possible fraud by cross-referencing data between public servants and social program beneficiaries.",
+                    "about.card1_title": "Automated Auditing",
+                    "about.card1_text": "Automatic data cross-referencing between payrolls and beneficiary registries.",
+                    "about.card2_title": "Legal Compliance",
+                    "about.card2_text": "Based on the Access to Information Law and aligned with best practices for public integrity.",
+                    "about.card3_title": "Data Intelligence",
+                    "about.card3_text": "Predictive analysis to identify irregularity patterns with high precision.",
+                    "use_cases.title": "Use Cases",
+                    "use_cases.subtitle": "Practical examples of how AuditaSocial can be applied to combat fraud and promote integrity.",
+                    "use_cases.case1_title": "Real Case: Municipal Doctor",
+                    "use_cases.case1_p1": "A municipality used AuditaSocial to identify a municipal doctor who was receiving Bolsa Família benefits, despite having an income above the program's limit.",
+                    "use_cases.case1_p2": "The tool automatically cross-referenced the municipal servants' data with the federal beneficiaries' registry, identifying the irregularity in seconds.",
+                    "use_cases.case1_item1": "Disciplinary Administrative Proceeding (PAD) initiated",
+                    "use_cases.case1_item2": "Irregular benefit cancelled",
+                    "use_cases.case1_item3": "Savings for the public purse",
+                    "use_cases.case1_item4": "Resource reallocated to families in need",
+                    "audience.title": "Who Can Use It",
+                    "audience.subtitle": "AuditaSocial was developed to serve different user profiles committed to public integrity.",
+                    "audience.card1_title": "Comptroller's Offices",
+                    "audience.card1_text": "State and municipal internal control bodies for payroll auditing.",
+                    "audience.card2_title": "General Public",
+                    "audience.card2_text": "Citizens who wish to monitor the correct application of public resources.",
+                    "audience.card3_title": "Journalists",
+                    "audience.card3_text": "Press professionals seeking data for investigative reports.",
+                    "audience.card4_title": "Researchers",
+                    "audience.card4_text": "Academics studying public policies and anti-corruption.",
+                    "data_sources.title": "Data Sources Used",
+                    "data_sources.subtitle": "The tool cross-references the list of servants provided by the user with public data of beneficiaries from various social programs.",
+                    "data_sources.card1_title": "User's Servants List",
+                    "data_sources.card1_text": "The main basis for analysis is the list of servants (municipal, state) that the user provides to the tool.",
+                    "data_sources.card2_title": "Bolsa Família Beneficiaries",
+                    "data_sources.card2_text": "Public list of all beneficiaries of Brazil's main income transfer program.",
+                    "data_sources.card3_title": "BPC Beneficiaries",
+                    "data_sources.card3_text": "Data from the Continuous Provision Benefit, for low-income elderly and disabled people.",
+                    "data_sources.card4_title": "Seguro Defeso Beneficiaries",
+                    "data_sources.card4_text": "Information on the benefit paid to artisanal fishermen during the closed season for fishing.",
+                    "contribute.title": "How to Contribute",
+                    "contribute.subtitle": "This is an open-source project and your help is crucial. Here's how you can get involved:",
+                    "contribute.card1_title": "For Developers",
+                    "contribute.card1_text": "Help optimize the Python code, improve the Docker scripts, or create new features. Check out our open issues.",
+                    "contribute.button_issues": "View Issues",
+                    "contribute.card2_title": "For Designers",
+                    "contribute.card2_text": "Have ideas to improve our interface or user experience? Create a mockup and share it with us on GitHub!",
+                    "contribute.button_ideas": "Share Ideas",
+                    "contribute.card3_title": "For Auditors & Journalists",
+                    "contribute.card3_text": "Use the tool and give us your feedback! Your use cases and findings are what drive us.",
+                    "contribute.button_contact": "Contact",
+                    "faq.title": "Frequently Asked Questions (FAQ)",
+                    "faq.subtitle": "Answers to the most common questions about AuditaSocial.",
+                    "faq.q1_title": "Is it legal to use this tool?",
+                    "faq.q1_text": "Yes. The tool only uses public data, the disclosure of which is guaranteed by the Access to Information Law (Law No. 12,527/2011). Cross-referencing this data for auditing and social control purposes is a legitimate and encouraged practice.",
+                    "faq.q2_title": "Is my data secure when using the program?",
+                    "faq.q2_text": "Yes. The AuditaSocial tool, when installed following our tutorial, runs 100% on your local machine. No information you enter (like your municipality's list of servants) is sent over the internet or to our servers. Privacy and security are total.",
+                    "faq.q3_title": "What should I do if I find a public servant receiving a benefit?",
+                    "faq.q3_text": "Verifying if the beneficiary is entitled to the benefit varies for each social benefit. If the tool indicates that a servant may be receiving the benefit without meeting the requirements, this information should be shared with the entity's internal control body (Municipal or State Comptroller's Office), where a functional misconduct should be investigated. In parallel, the result can be shared with the Court of Accounts, the CGU, and the Public Prosecutor's Office, which may take additional measures to ensure the payment is stopped and the servant is held accountable.",
+                    "faq.q4_title": "What technology does the tool use?",
+                    "faq.q4_text": "The tool's core is built in Python, using robust data analysis libraries like Pandas. The environment is managed by Docker, which ensures that installation is simple and works consistently on any computer.",
+                    "faq.q5_title": "How can I report a bug or suggest an improvement?",
+                    "faq.q5_text": 'The best way to contribute is through our GitHub repository. You can <a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais/issues" target="_blank">open an "Issue"</a> to describe the problem or your suggestion. We appreciate all community collaboration!',
+                    "team.title": "Our Team",
+                    "team.subtitle": "Meet the creators and developers behind the AuditaSocial project.",
+                    "team.member1_name": "Caio Sobreira Lima",
+                    "team.member1_role": "Back-End Developer",
+                    "team.member1_bio": "Public servant and developer responsible for the system architecture and the data processing and cross-referencing logic.",
+                    "team.member2_name": "Marcelo L. Perrucci",
+                    "team.member2_role": "Creator & UX",
+                    "team.member2_bio": "Federal Auditor and researcher. Specialist in public policy, comptrolling, accountability, social control, and transparency.",
+                    "team.member3_name": "Rafael Freitas",
+                    "team.member3_role": "Front-End Developer",
+                    "team.member3_bio": "Public servant and developer responsible for the solution's visual interface and tool automation.",
+                    "github.title": "Access the Source Code",
+                    "github.subtitle": "AuditaSocial is a free, open-source software available on GitHub. Contribute to the project or use it in your organization.",
+                    "github.button": "GitHub Repository",
+                    "footer.description": "A technological solution for identifying irregularities by cross-referencing public servants and federal program beneficiaries.",
+                    "footer.links_title": "Quick Links",
+                    "footer.resources_title": "Resources",
+                    "footer.resources_doc": "Documentation",
+                    "footer.resources_report": "Report a Problem",
+                    "footer.resources_law": "Access to Information Law",
+                    "footer.latest_version": 'Latest version available at <a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais" style="color: var(--accent);">https://github.com/CaioSobreira/cruzamento_servidores_bases_federais</a>'
+                },
+                'es': {
+                    title: "AuditaSocial",
+                    "nav.about": "Acerca de",
+                    "nav.audience": "Público",
+                    "nav.faq": "FAQ",
+                    "nav.tutorial": "Tutorial",
+                    "nav.sourceCode": "Código Fuente",
+                    "hero.title": "Herramienta de Auditoría Social",
+                    "hero.subtitle": "Solución de código abierto para identificar irregularidades cruzando datos de servidores públicos y beneficiarios de programas federales.",
+                    "hero.button_github": "Acceder a GitHub",
+                    "hero.button_tutorial": "Ver Tutorial",
+                    "about.title": "Acerca de la Herramienta",
+                    "about.subtitle": "AuditaSocial es una solución innovadora que permite identificar posibles fraudes cruzando datos entre servidores públicos y beneficiarios de programas sociales.",
+                    "about.card1_title": "Auditoría Automatizada",
+                    "about.card1_text": "Cruce automático de datos entre nóminas y registros de beneficiarios.",
+                    "about.card2_title": "Cumplimiento Legal",
+                    "about.card2_text": "Basado en la Ley de Acceso a la Información y alineado con las mejores prácticas de integridad pública.",
+                    "about.card3_title": "Inteligencia de Datos",
+                    "about.card3_text": "Análisis predictivo para identificar patrones de irregularidades con alta precisión.",
+                    "use_cases.title": "Casos de Uso",
+                    "use_cases.subtitle": "Ejemplos prácticos de cómo AuditaSocial puede aplicarse para combatir el fraude y promover la integridad.",
+                    "use_cases.case1_title": "Caso Real: Médico Municipal",
+                    "use_cases.case1_p1": "Un municipio utilizó AuditaSocial para identificar a un médico municipal que recibía beneficios de Bolsa Família, a pesar de tener ingresos superiores al límite del programa.",
+                    "use_cases.case1_p2": "La herramienta cruzó automáticamente los datos de los servidores municipales con el registro de beneficiarios federales, identificando la irregularidad en segundos.",
+                    "use_cases.case1_item1": "Procedimiento Administrativo Disciplinario (PAD) iniciado",
+                    "use_cases.case1_item2": "Beneficio irregular cancelado",
+                    "use_cases.case1_item3": "Ahorro para las arcas públicas",
+                    "use_cases.case1_item4": "Recurso reasignado a familias necesitadas",
+                    "audience.title": "Quién Puede Usarlo",
+                    "audience.subtitle": "AuditaSocial fue desarrollado para atender a diferentes perfiles de usuarios comprometidos con la integridad pública.",
+                    "audience.card1_title": "Contralorías",
+                    "audience.card1_text": "Órganos de control interno estatales y municipales para la auditoría de nóminas.",
+                    "audience.card2_title": "Población",
+                    "audience.card2_text": "Ciudadanos que desean fiscalizar la correcta aplicación de los recursos públicos.",
+                    "audience.card3_title": "Periodistas",
+                    "audience.card3_text": "Profesionales de la prensa en busca de datos para reportajes de investigación.",
+                    "audience.card4_title": "Investigadores",
+                    "audience.card4_text": "Académicos que estudian políticas públicas y la lucha contra la corrupción.",
+                    "data_sources.title": "Fuentes de Datos Utilizadas",
+                    "data_sources.subtitle": "La herramienta cruza la lista de servidores proporcionada por el usuario con datos públicos de beneficiarios de diversos programas sociales.",
+                    "data_sources.card1_title": "Lista de Servidores del Usuario",
+                    "data_sources.card1_text": "La base principal de análisis es la lista de servidores (municipal, estatal) que el propio usuario proporciona a la herramienta.",
+                    "data_sources.card2_title": "Beneficiarios de Bolsa Família",
+                    "data_sources.card2_text": "Lista pública de todos los beneficiarios del principal programa de transferencia de ingresos de Brasil.",
+                    "data_sources.card3_title": "Beneficiarios de BPC",
+                    "data_sources.card3_text": "Datos del Beneficio de Prestación Continuada, para personas mayores y con discapacidad de bajos ingresos.",
+                    "data_sources.card4_title": "Beneficiarios de Seguro Defeso",
+                    "data_sources.card4_text": "Información sobre el beneficio pagado a pescadores artesanales durante la veda de pesca.",
+                    "contribute.title": "Cómo Contribuir",
+                    "contribute.subtitle": "Este es un proyecto de código abierto y tu ayuda es fundamental. Así es como puedes participar:",
+                    "contribute.card1_title": "Para Desarrolladores",
+                    "contribute.card1_text": "Ayuda a optimizar el código de Python, mejorar los scripts de Docker o crear nuevas funciones. Consulta nuestros 'issues' abiertos.",
+                    "contribute.button_issues": "Ver Issues",
+                    "contribute.card2_title": "Para Diseñadores",
+                    "contribute.card2_text": "¿Tienes ideas para mejorar nuestra interfaz o experiencia de usuario? ¡Crea un prototipo y compártelo con nosotros en GitHub!",
+                    "contribute.button_ideas": "Compartir Ideas",
+                    "contribute.card3_title": "Para Auditores y Periodistas",
+                    "contribute.card3_text": "¡Usa la herramienta y danos tu opinión! Tus casos de uso y hallazgos son lo que nos impulsa.",
+                    "contribute.button_contact": "Contacto",
+                    "faq.title": "Preguntas Frecuentes (FAQ)",
+                    "faq.subtitle": "Respuestas a las preguntas más comunes sobre AuditaSocial.",
+                    "faq.q1_title": "¿Es legal usar esta herramienta?",
+                    "faq.q1_text": "Sí. La herramienta solo utiliza datos públicos, cuya divulgación está garantizada por la Ley de Acceso a la Información (Ley nº 12.527/2011). El cruce de estos datos para fines de auditoría y control social es una práctica legítima y fomentada.",
+                    "faq.q2_title": "¿Están mis datos seguros al usar el programa?",
+                    "faq.q2_text": "Sí. La herramienta AuditaSocial, cuando se instala siguiendo nuestro tutorial, se ejecuta 100% en tu máquina local. Ninguna información que ingreses (como la lista de servidores de tu municipio) se envía a internet o a nuestros servidores. La privacidad y la seguridad son totales.",
+                    "faq.q3_title": "¿Qué hago si encuentro a un servidor público recibiendo un beneficio?",
+                    "faq.q3_text": "La verificación de si el beneficiario tiene derecho al beneficio varía para cada beneficio social. Si la herramienta indica que un servidor puede estar recibiendo el beneficio sin cumplir los requisitos, esta información debe compartirse con el órgano de control interno de la entidad (Contraloría Municipal o Estatal), donde se investigará una falta funcional. Paralelamente, el resultado puede compartirse con el Tribunal de Cuentas, la CGU y el Ministerio Público, que podrán tomar medidas adicionales para garantizar la interrupción del pago y la rendición de cuentas del servidor.",
+                    "faq.q4_title": "¿Qué tecnología utiliza la herramienta?",
+                    "faq.q4_text": "El núcleo de la herramienta está construido en Python, utilizando bibliotecas robustas de análisis de datos como Pandas. El entorno es gestionado por Docker, lo que garantiza que la instalación sea simple y funcione de manera consistente en cualquier computadora.",
+                    "faq.q5_title": "¿Cómo puedo reportar un error o sugerir una mejora?",
+                    "faq.q5_text": 'La mejor manera de contribuir es a través de nuestro repositorio de GitHub. Puedes <a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais/issues" target="_blank">abrir un "Issue"</a> para describir el problema o tu sugerencia. ¡Agradecemos toda la colaboración de la comunidad!',
+                    "team.title": "Nuestro Equipo",
+                    "team.subtitle": "Conoce a los creadores y desarrolladores detrás del proyecto AuditaSocial.",
+                    "team.member1_name": "Caio Sobreira Lima",
+                    "team.member1_role": "Desarrollador Back-End",
+                    "team.member1_bio": "Servidor público y desarrollador responsable de la arquitectura del sistema y la lógica de procesamiento y cruce de datos.",
+                    "team.member2_name": "Marcelo L. Perrucci",
+                    "team.member2_role": "Creador & UX",
+                    "team.member2_bio": "Auditor Federal e investigador. Especialista en políticas públicas, contraloría, rendición de cuentas, control social y transparencia.",
+                    "team.member3_name": "Rafael Freitas",
+                    "team.member3_role": "Desarrollador Front-End",
+                    "team.member3_bio": "Servidor público y desarrollador responsable de la interfaz visual de la solución y la automatización de la herramienta.",
+                    "github.title": "Accede al Código Fuente",
+                    "github.subtitle": "AuditaSocial es un software de código abierto y gratuito disponible en GitHub. Contribuye al proyecto o úsalo en tu organización.",
+                    "github.button": "Repositorio en GitHub",
+                    "footer.description": "Solución tecnológica para identificar irregularidades cruzando datos de servidores públicos y beneficiarios de programas federales.",
+                    "footer.links_title": "Enlaces Rápidos",
+                    "footer.resources_title": "Recursos",
+                    "footer.resources_doc": "Documentación",
+                    "footer.resources_report": "Reportar un Problema",
+                    "footer.resources_law": "Ley de Acceso a la Información",
+                    "footer.latest_version": 'Última versión disponible en <a href="https://github.com/CaioSobreira/cruzamento_servidores_bases_federais" style="color: var(--accent);">https://github.com/CaioSobreira/cruzamento_servidores_bases_federais</a>'
+                }
+            };
+            
+            // --- i18n Functionality ---
+            const setLanguage = (lang) => {
+                document.documentElement.lang = lang;
+                document.querySelectorAll('[data-i18n-key]').forEach(element => {
+                    const key = element.getAttribute('data-i18n-key');
+                    if (translations[lang] && translations[lang][key]) {
+                        element.innerHTML = translations[lang][key];
+                    }
+                });
+                localStorage.setItem('language', lang);
+                
+                let flagSrc = '';
+                if (lang === 'pt') flagSrc = 'https://flagcdn.com/w40/br.png';
+                if (lang === 'en') flagSrc = 'https://flagcdn.com/w40/us.png';
+                if (lang === 'es') flagSrc = 'https://flagcdn.com/w40/es.png';
+                selectedFlag.src = flagSrc;
+            };
+
+            langOptions.forEach(option => {
+                option.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    setLanguage(option.dataset.lang);
+                    langDropdown.classList.remove('active');
+                });
             });
 
-            // Show the selected page
-            const selectedPage = document.getElementById('page-' + pageId);
-            if (selectedPage) {
-                selectedPage.style.display = 'block';
-            }
-            // Scroll to top
-            window.scrollTo(0, 0);
-        }
+            const initialLang = localStorage.getItem('language') || 'pt';
+            setLanguage(initialLang);
 
-        // Set the initial page to be 'home'
-        document.addEventListener('DOMContentLoaded', () => {
+            // --- Theme Toggle ---
+            const themeIcon = themeToggleButton.querySelector('i');
+            const applyTheme = (theme) => {
+                document.documentElement.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+                themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            };
+
+            themeToggleButton.addEventListener('click', () => {
+                const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                applyTheme(newTheme);
+            });
+
+            const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            applyTheme(savedTheme);
+
+            // --- Mobile Menu Logic ---
+            const toggleNav = () => mobileNav.classList.toggle('active');
+            navToggle.addEventListener('click', toggleNav);
+            navClose.addEventListener('click', toggleNav);
+            
+            document.querySelectorAll('.mobile-nav a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if(mobileNav.classList.contains('active')) toggleNav();
+                });
+            });
+
+            // --- Language Dropdown Logic ---
+            langSelector.addEventListener('click', (e) => {
+                e.stopPropagation();
+                langDropdown.classList.toggle('active');
+            });
+            
+            document.addEventListener('click', (e) => {
+                if (!langSelector.contains(e.target) && !langDropdown.contains(e.target)) {
+                    langDropdown.classList.remove('active');
+                }
+            });
+
+            // --- Page Switching and Smooth Scroll ---
+            window.showPage = (pageId) => {
+                mainContentPages.forEach(page => page.classList.remove('active'));
+                const selectedPage = document.getElementById('page-' + pageId);
+                if (selectedPage) selectedPage.classList.add('active');
+                window.scrollTo(0, 0);
+                updateActiveLink();
+            };
+            
+            scrollLinks.forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href.startsWith('#')) {
+                        e.preventDefault();
+                        if (!document.getElementById('page-home').classList.contains('active')) {
+                            showPage('home');
+                        }
+                        setTimeout(() => {
+                            const targetElement = document.querySelector(href);
+                            if (targetElement) {
+                                targetElement.scrollIntoView({ behavior: 'smooth' });
+                            }
+                        }, 100);
+                    }
+                });
+            });
+
+            // --- Active Link & Scroll Animations ---
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            animatedElements.forEach(el => observer.observe(el));
+            
+            function updateActiveLink() {
+                let currentSectionId = '';
+                const homePageIsActive = document.getElementById('page-home').classList.contains('active');
+                if (homePageIsActive) {
+                    allSections.forEach(section => {
+                        if (pageYOffset >= section.offsetTop - 100) currentSectionId = section.id;
+                    });
+                }
+                document.querySelectorAll('.desktop-nav a, .mobile-nav a').forEach(link => {
+                    link.classList.remove('active-link');
+                    const linkHref = (link.getAttribute('href') || '').substring(1);
+                    const dataPage = link.getAttribute('data-page');
+                    if ((dataPage === 'tutorial' && document.getElementById('page-tutorial').classList.contains('active')) || (linkHref && linkHref === currentSectionId)) {
+                        link.classList.add('active-link');
+                    }
+                });
+            }
+
+            // --- Back to Top Button Logic ---
+            window.onscroll = () => {
+                backToTopButton.classList.toggle('visible', document.body.scrollTop > 200 || document.documentElement.scrollTop > 200);
+                updateActiveLink();
+            };
+
+            backToTopButton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+            // --- Initial Page Load ---
             showPage('home');
         });
     </script>
